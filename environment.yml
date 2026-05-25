@@ -1,0 +1,19 @@
+name: litpaper
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pandas
+  - numpy
+  - scikit-learn
+  - scipy
+  - matplotlib
+  - seaborn
+  - nltk
+  - spacy
+  - pip
+  - pip:
+      - textstat
+      - pypdf
+      - pdfplumber
