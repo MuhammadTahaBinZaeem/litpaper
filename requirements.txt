@@ -1,0 +1,14 @@
+# Step 1 dependency stub
+# This file will be finalized as scripts are added.
+
+pandas
+numpy
+scikit-learn
+scipy
+matplotlib
+seaborn
+nltk
+spacy
+textstat
+pypdf
+pdfplumber
