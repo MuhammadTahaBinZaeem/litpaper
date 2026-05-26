@@ -1,0 +1,14 @@
+metric,value
+tracked_pdf_count,29
+original_zip_pdf_count,27
+later_uploaded_wilde_pdf_count,2
+text_extraction_tool,pdftotext -layout -enc UTF-8
+extracted_pdf_count,29
+failed_or_empty_pdf_count,0
+total_extracted_words,8245542
+total_extracted_text_bytes_utf8,44782448
+raw_pdfs_committed_to_repo,false
+raw_pdf_binary_preservation_method_needed,git_lfs
+wilde_usable_source,Lord Arthur Savile and Other Stories PDF
+wilde_excluded_retelling,THE PICTURE OF DORIAN GRAY PDF
+wilde_excluded_drama_volume,Complete works of Oscar Wilde 1921 volume 6
