@@ -1,7 +1,7 @@
 author_id,candidate_pass_length,candidate_fail_length,candidate_fail_low_sentence_count,meets_120_target
-austen,1896,0,0,true
-dickens,5242,0,0,true
-poe,804,0,0,true
-shelley,2265,0,3,true
-twain,153,0,0,true
-wilde,54,0,0,false
+austen,395,0,0,true
+dickens,471,0,0,true
+poe,255,0,0,true
+shelley,342,0,0,true
+twain,252,0,0,true
+wilde,164,0,0,true
