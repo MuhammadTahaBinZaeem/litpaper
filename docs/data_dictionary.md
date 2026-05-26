@@ -169,7 +169,7 @@ Expected columns:
 
 Step 5 source-level cleaning validation metrics.
 
-Expected columns:
+Expected columns include:
 
 - `source_id`
 - `author_id`
@@ -179,26 +179,7 @@ Expected columns:
 - `word_loss_ratio`
 - `char_loss_ratio`
 - `removed_artifact_lines`
-- `word_count`
-- `sentence_count`
-- `mean_sentence_words`
-- `median_sentence_words`
-- `std_sentence_words`
-- `long_sentence_ratio`
-- `short_sentence_ratio`
-- `punctuation_per_1000w`
-- `comma_per_1000w`
-- `semicolon_per_1000w`
-- `colon_per_1000w`
-- `dash_per_1000w`
-- `exclamation_per_1000w`
-- `question_per_1000w`
-- `quote_mark_per_1000w`
-- `apostrophe_per_1000w`
-- `ellipsis_per_1000w`
-- `contraction_per_1000w`
-- `archaic_marker_per_1000w`
-- `abstract_suffix_per_1000w`
+- style-preservation metrics
 - `validation_flags`
 
 ### `metadata/author_style_validation_summary.csv`
@@ -210,15 +191,60 @@ Expected columns:
 - `author_id`
 - `validated_source_count`
 - `total_cleaned_words`
-- `mean_punctuation_per_1000w`
-- `mean_sentence_words`
-- `mean_long_sentence_ratio`
-- `mean_semicolon_per_1000w`
-- `mean_dash_per_1000w`
-- `mean_quote_mark_per_1000w`
-- `mean_apostrophe_per_1000w`
-- `mean_contraction_per_1000w`
+- author-level style metrics
 - `style_validation_result`
+
+### `metadata/candidate_passage_schema.csv`
+
+Step 6 schema for candidate passage rows generated in Step 7.
+
+Expected columns include:
+
+- `candidate_id`
+- `source_id`
+- `author_id`
+- `author_name`
+- `work_id`
+- `work_title`
+- `source_path`
+- `candidate_index_within_source`
+- `start_word_index`
+- `end_word_index`
+- `word_count`
+- `sentence_count`
+- `paragraph_count`
+- `start_char`
+- `end_char`
+- `dialogue_marker_count`
+- `dialogue_marker_per_1000w`
+- `punctuation_per_1000w`
+- `semicolon_per_1000w`
+- `dash_per_1000w`
+- `apostrophe_per_1000w`
+- `mean_sentence_words`
+- `long_sentence_ratio`
+- `extraction_rule_version`
+- `candidate_status`
+- `exclusion_reason`
+- `text`
+
+### `metadata/passage_extraction_config.json`
+
+Step 6 configuration for candidate passage extraction.
+
+Important fields:
+
+- `random_seed`
+- `input_dir`
+- `output_candidate_passages`
+- `output_candidate_metadata`
+- `preferred_words_per_passage`
+- `minimum_words_per_passage`
+- `maximum_words_per_passage`
+- `minimum_gap_words_same_source`
+- `allowed_source_statuses`
+- `excluded_source_statuses`
+- `extraction_rule_version`
 
 ## Current logs/reports
 
@@ -226,13 +252,15 @@ Expected columns:
 - `logs/cleaning_output_summary.md` — Step 4 human-readable cleaning summary.
 - `logs/step_04_reproduction_verification.md` — Step 4 reproduction proof.
 - `logs/cleaning_validation_report.md` — Step 5 author-specific cleaning validation report.
+- `logs/step_06_status.md` — Step 6 passage-extraction protocol status report.
 
 ## Future datasets
 
-The following datasets will be defined in later steps:
+The following datasets will be defined or generated in later steps:
 
 - `data/interim/cleaned_books/`
 - `data/interim/candidate_passages.csv`
+- `metadata/candidate_passage_metadata.csv`
 - `data/processed/original_passages.csv`
 - `data/final/master_text_dataset.csv`
 - `data/final/master_feature_dataset.csv`
@@ -242,7 +270,8 @@ The following datasets will be defined in later steps:
 
 - `author_id`: lowercase stable identifier, e.g. `austen`, `poe`, `twain`, `wilde`, `dickens`, `shelley`.
 - `work_id`: lowercase stable identifier derived from title.
-- `passage_id`: stable identifier in the form `AUTHOR_WORK_####`.
+- `candidate_id`: stable identifier generated before final passage selection.
+- `passage_id`: stable identifier in the form `AUTHOR_WORK_####` for final selected passages.
 - `condition`: one of `original`, `paraphrase`, `modernize`, `simplify`.
 
 ## Removed stale files
@@ -251,4 +280,4 @@ The earlier preliminary `metadata/text_extraction_manifest.csv` was removed in S
 
 ## Step status
 
-Updated during Step 5. Not final.
+Updated during Step 6. Not final.
