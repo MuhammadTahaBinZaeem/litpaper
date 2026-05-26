@@ -56,6 +56,22 @@ Total: 1879 candidates
 
 All six authors meet the minimum 120-candidate target.
 
+### Final selected original-passage layer
+
+Step 8 selected the balanced original-passage layer.
+
+```text
+Austen: 60 selected original passages
+Dickens: 60 selected original passages
+Poe: 60 selected original passages
+Shelley: 60 selected original passages
+Twain: 60 selected original passages
+Wilde: 60 selected original passages
+Total: 360 selected original passages
+```
+
+Each author contributes two works. Each work contributes 30 selected passages.
+
 ## Important generated files
 
 ### Source/provenance
@@ -101,16 +117,23 @@ Exporter script:
 scripts/06_export_gutenberg_candidates_md.py
 ```
 
-The Markdown chunks are generated from:
+### Final selected original passages
 
 ```text
-data/interim/gutenberg_candidate_passages.csv
+scripts/07_select_final_passages.py
+metadata/selection_summary.csv
+metadata/selected_counts_by_author.csv
+metadata/selected_counts_by_work.csv
+metadata/selection_filter_report.csv
+metadata/step8_output_manifest.csv
+logs/step_08_status.md
 ```
 
-The chunk manifest is generated at:
+The final selected passage text is generated locally into:
 
 ```text
-metadata/gutenberg_candidate_text_md_manifest.csv
+data/processed/selected_original_passages.csv
+data/processed/selected_passages_md/
 ```
 
 ## Rebuild commands
@@ -122,12 +145,19 @@ python scripts/04_fetch_gutenberg_sources.py
 python scripts/05_run_canonical_migration.py
 python scripts/06_export_gutenberg_candidates_md.py
 python scripts/check_gutenberg_steps_01_07_consistency.py
+python scripts/07_select_final_passages.py
 ```
 
-Expected final checker result:
+Expected Step 1–7 checker result:
 
 ```text
 PASS: Gutenberg canonical Steps 1-7 are internally consistent and balance-ready.
+```
+
+Expected Step 8 result:
+
+```text
+360 selected original passages
 ```
 
 ## Change record
@@ -168,6 +198,10 @@ Migrated the source layer to Project Gutenberg plain text. Added canonical regis
 
 Added a script to export the full Gutenberg candidate text into chunked Markdown files so the passage text can be kept in a repository-readable form.
 
+### Step 8 — Final balanced original-passage selection
+
+Selected 360 original passages: 60 per author, 30 per work, across 12 canonical Gutenberg works. The selected original layer is ready for controlled rewriting conditions.
+
 ## Next step
 
-Proceed to **Step 8 — final balanced passage selection** using the canonical Gutenberg candidate pool, not the legacy PDF-derived pool.
+Proceed to **Step 9 — controlled rewriting prompt protocol** for paraphrase, modernize, and simplify conditions.
