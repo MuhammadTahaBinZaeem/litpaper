@@ -1,0 +1,13 @@
+canonical_id,author_id,work_id,total,pass_length,fail_length,fail_low_sentence
+pg_austen_1342,austen,pride_and_prejudice,175,175,0,0
+pg_austen_158,austen,emma,220,220,0,0
+pg_dickens_1400,dickens,great_expectations,254,254,0,0
+pg_dickens_730,dickens,oliver_twist,217,217,0,0
+pg_poe_2147,poe,works_volume_1,124,124,0,0
+pg_poe_2148,poe,works_volume_2,131,131,0,0
+pg_twain_76,twain,huckleberry_finn,153,153,0,0
+pg_twain_74,twain,tom_sawyer,99,99,0,0
+pg_shelley_84,shelley,frankenstein,103,103,0,0
+pg_shelley_18247,shelley,the_last_man,239,239,0,0
+pg_wilde_174,wilde,dorian_gray,110,110,0,0
+pg_wilde_773,wilde,lord_arthur_stories,54,54,0,0
