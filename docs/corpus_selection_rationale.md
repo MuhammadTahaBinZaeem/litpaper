@@ -41,7 +41,8 @@ A work is eligible for the main corpus if it is:
 - long enough to support 450–650 word passage extraction,
 - not primarily drama, poetry, essays, letters, travel writing, biography, or editorial commentary,
 - extractable into reasonably clean text,
-- not collaborative unless used only as an explicit backup.
+- not collaborative unless used only as an explicit backup,
+- the author's original prose, not a simplified retelling/adaptation by another writer.
 
 ## Planned main sources by author
 
@@ -166,23 +167,23 @@ Rationale: Shelley is retained for Gothic register, elevated diction, emotional 
 
 ### Oscar Wilde
 
-Current uploaded source:
+Uploaded Wilde sources now include:
 
-- `source/Oscarwilde/Complete works of Oscar Wilde (1921) 6.pdf`
+- `source/Oscarwilde/Complete works of Oscar Wilde (1921) 6.pdf` — drama volume; excluded from main prose-fiction corpus.
+- `source/Oscarwilde/Lord Arthur Savile’s Crime and Other Stories - Oscar Wilde - PDF Room.pdf` — usable prose-fiction collection; added after Step 2 and now accepted as Wilde's current usable source.
+- `source/Oscarwilde/THE PICTURE OF DORIAN GRAY.pdf` — excluded because it is an Oxford Bookworms 1989 retelling by Jill Nevile, not Wilde's original prose.
 
-Initial PDF inspection shows this source begins with *Lady Windermere's Fan* and appears to be a drama volume. Since the main study is prose fiction, this current source is not suitable for the main corpus.
+Current main candidate:
 
-Required source gap:
+- *Lord Arthur Savile's Crime and Other Stories* — main/backup usable prose source after extraction validation.
 
-- *The Picture of Dorian Gray* should be added as the preferred Wilde prose source.
+Remaining desired source gap:
 
-Desired backup:
+- An original public-domain edition of *The Picture of Dorian Gray* remains preferred but is not currently available in the repo. The uploaded `THE PICTURE OF DORIAN GRAY.pdf` should not be used for authorial-style analysis.
 
-- *Lord Arthur Savile's Crime and Other Stories* or another Wilde prose-fiction source.
+Rationale: Wilde is retained for aphoristic compression, wit, and balanced phrasing. The drama source is excluded to avoid genre confounds, and the retelling is excluded to avoid measuring Jill Nevile's adapted prose instead of Wilde's original style.
 
-Rationale: Wilde is retained conceptually for aphoristic compression, wit, and balanced phrasing, but the current uploaded source does not meet the main prose-fiction corpus criteria.
-
-## Main corpus strategy after Step 2
+## Main corpus strategy after Step 2 update
 
 The target remains:
 
@@ -205,17 +206,20 @@ The preferred main works are:
 | Poe | Selected prose tales; backup: *Arthur Gordon Pym* |
 | Twain | *Huckleberry Finn*; desired backup: *Tom Sawyer* |
 | Shelley | *Frankenstein* 1818, *The Last Man* |
-| Wilde | **source gap:** add *The Picture of Dorian Gray* |
+| Wilde | *Lord Arthur Savile's Crime and Other Stories*; desired original *Dorian Gray* still missing |
 
-## Important Step 2 finding
+## Important Step 2 update
 
-The corpus is mostly viable, but Wilde is not yet source-complete. The uploaded Wilde PDF appears to contain drama, not prose fiction. This should be fixed before final passage extraction.
+The earlier Wilde prose source gap is now partially fixed. A usable Wilde prose-fiction collection has been added, but the uploaded *Dorian Gray* file is not valid for the main corpus because it is a retelling.
 
-## Files created in Step 2
+## Files maintained by Step 2
 
 - `metadata/author_work_map.csv`
 - `metadata/source_item_review.csv`
+- `metadata/source_inventory.csv`
+- `metadata/wilde_new_source_review.csv`
 - `docs/corpus_selection_rationale.md`
+- `docs/wilde_source_addendum.md`
 - `logs/step_02_status.md`
 
 ## Next step
