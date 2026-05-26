@@ -7,6 +7,9 @@ Step 7 will run this script to generate the candidate passage pool.
 Purpose
 -------
 Extract non-overlapping, style-preserving candidate passages from cleaned texts.
+The extractor is conservative and sentence-aware: it avoids mid-sentence cuts
+where possible and uses word-gap stepping to prevent overlapping candidates.
+
 The final 360-passage dataset is NOT selected here; final selection and balance
 belong to Step 8.
 
@@ -26,7 +29,7 @@ from typing import Iterable
 CONFIG_PATH = Path("metadata/passage_extraction_config.json")
 SOURCE_ID_MAP_PATH = Path("metadata/source_id_map.csv")
 WORD_RE = re.compile(r"\b[\w’'-]+\b", re.UNICODE)
-SENT_SPLIT_RE = re.compile(r"[.!?]+")
+SENTENCE_RE = re.compile(r"[^.!?]+[.!?]+(?:[\"”’]+)?|[^.!?]+$", re.UNICODE)
 PUNCT_CHARS = set(".,;:!?—–-\"“”‘’'…")
 
 
@@ -39,34 +42,37 @@ def read_csv(path: Path) -> list[dict[str, str]]:
         return list(csv.DictReader(f))
 
 
-def word_spans(text: str) -> list[re.Match[str]]:
-    return list(WORD_RE.finditer(text))
-
-
 def words(text: str) -> list[str]:
     return WORD_RE.findall(text)
 
 
-def sentence_count(text: str) -> int:
-    compact = re.sub(r"\s+", " ", text.strip())
-    if not compact:
-        return 0
-    return len([s for s in SENT_SPLIT_RE.split(compact) if s.strip()])
+def word_count(text: str) -> int:
+    return len(words(text))
 
 
 def paragraph_count(text: str) -> int:
     return len([p for p in re.split(r"\n\s*\n", text.strip()) if p.strip()])
 
 
-def per_1000(count: int, word_count: int) -> float:
-    return round(count / word_count * 1000, 3) if word_count else 0.0
+def per_1000(count: int, word_total: int) -> float:
+    return round(count / word_total * 1000, 3) if word_total else 0.0
+
+
+def sentence_spans(text: str) -> list[tuple[int, int, str, int]]:
+    spans: list[tuple[int, int, str, int]] = []
+    for match in SENTENCE_RE.finditer(text):
+        sentence = match.group(0).strip()
+        wc = word_count(sentence)
+        if wc > 0:
+            spans.append((match.start(), match.end(), sentence, wc))
+    return spans
 
 
 def passage_metrics(text: str) -> dict[str, int | float]:
     toks = words(text)
-    word_count = len(toks)
-    sents = [s for s in SENT_SPLIT_RE.split(re.sub(r"\s+", " ", text.strip())) if s.strip()]
-    sent_lens = [len(words(s)) for s in sents if words(s)]
+    word_total = len(toks)
+    sentences = sentence_spans(text)
+    sent_lens = [s[3] for s in sentences]
     punctuation_total = sum(1 for c in text if c in PUNCT_CHARS)
     dialogue_marker_count = sum(text.count(ch) for ch in ['"', "“", "”", "‘", "’"])
     semicolon_count = text.count(";")
@@ -74,15 +80,15 @@ def passage_metrics(text: str) -> dict[str, int | float]:
     apostrophe_count = text.count("'") + text.count("’")
     long_sentence_count = sum(1 for n in sent_lens if n >= 40)
     return {
-        "word_count": word_count,
+        "word_count": word_total,
         "sentence_count": len(sent_lens),
         "paragraph_count": paragraph_count(text),
         "dialogue_marker_count": dialogue_marker_count,
-        "dialogue_marker_per_1000w": per_1000(dialogue_marker_count, word_count),
-        "punctuation_per_1000w": per_1000(punctuation_total, word_count),
-        "semicolon_per_1000w": per_1000(semicolon_count, word_count),
-        "dash_per_1000w": per_1000(dash_count, word_count),
-        "apostrophe_per_1000w": per_1000(apostrophe_count, word_count),
+        "dialogue_marker_per_1000w": per_1000(dialogue_marker_count, word_total),
+        "punctuation_per_1000w": per_1000(punctuation_total, word_total),
+        "semicolon_per_1000w": per_1000(semicolon_count, word_total),
+        "dash_per_1000w": per_1000(dash_count, word_total),
+        "apostrophe_per_1000w": per_1000(apostrophe_count, word_total),
         "mean_sentence_words": round(sum(sent_lens) / len(sent_lens), 3) if sent_lens else 0.0,
         "long_sentence_ratio": round(long_sentence_count / len(sent_lens), 6) if sent_lens else 0.0,
     }
@@ -100,31 +106,76 @@ def make_candidate_id(author_id: str, source_id: str, index: int) -> str:
     return f"{author_id.upper()}_{source_id.upper()}_{index:04d}"
 
 
-def extract_windows(text: str, preferred_words: int, min_words: int, max_words: int, gap_words: int) -> Iterable[tuple[int, int, int, int, str]]:
-    spans = word_spans(text)
-    if len(spans) < min_words:
-        return
-    start_word = 0
-    candidate_index = 1
-    step = preferred_words + gap_words
-    while start_word + min_words <= len(spans):
-        end_word = min(start_word + preferred_words, len(spans))
-        if end_word - start_word < min_words:
+def word_index_at_char(text: str, char_offset: int) -> int:
+    count = 0
+    for match in WORD_RE.finditer(text):
+        if match.start() >= char_offset:
             break
-        if end_word - start_word > max_words:
-            end_word = start_word + max_words
-        start_char = spans[start_word].start()
-        end_char = spans[end_word - 1].end()
+        count += 1
+    return count
+
+
+def extract_sentence_aware_windows(
+    text: str,
+    preferred_words: int,
+    min_words: int,
+    max_words: int,
+    gap_words: int,
+) -> Iterable[tuple[int, int, int, int, int, str]]:
+    """Yield non-overlapping, sentence-boundary candidate windows.
+
+    The extractor starts at a sentence boundary, accumulates full sentences until
+    the passage reaches the preferred length, then accepts it if it is within
+    hard bounds. The next start advances by passage length plus the configured
+    word gap, which prevents overlapping candidates.
+    """
+    sentences = sentence_spans(text)
+    if not sentences:
+        return
+
+    candidate_index = 1
+    start_sentence = 0
+    while start_sentence < len(sentences):
+        total_words = 0
+        end_sentence = start_sentence
+        while end_sentence < len(sentences) and total_words < preferred_words:
+            total_words += sentences[end_sentence][3]
+            end_sentence += 1
+
+        if total_words < min_words:
+            break
+
+        # If the preferred chunk is too long, back off by one sentence if possible.
+        while total_words > max_words and end_sentence - start_sentence > 1:
+            end_sentence -= 1
+            total_words -= sentences[end_sentence][3]
+
+        start_char = sentences[start_sentence][0]
+        end_char = sentences[end_sentence - 1][1]
         passage = text[start_char:end_char].strip()
-        yield candidate_index, start_word, end_word, start_char, end_char, passage
-        candidate_index += 1
-        start_word += step
+        actual_words = word_count(passage)
+
+        if actual_words >= min_words:
+            start_word_index = word_index_at_char(text, start_char)
+            end_word_index = start_word_index + actual_words
+            yield candidate_index, start_word_index, end_word_index, start_char, end_char, passage
+            candidate_index += 1
+
+        # Advance by at least the passage length plus configured gap.
+        target_advance = max(actual_words + gap_words, preferred_words + gap_words)
+        advanced_words = 0
+        next_start = start_sentence
+        while next_start < len(sentences) and advanced_words < target_advance:
+            advanced_words += sentences[next_start][3]
+            next_start += 1
+        if next_start <= start_sentence:
+            next_start = start_sentence + 1
+        start_sentence = next_start
 
 
 def infer_work_fields(source_row: dict[str, str]) -> tuple[str, str]:
     # Step 7/8 will refine work boundaries for complete-works containers.
     status = source_row["main_corpus_status"]
-    author = source_row["author_id"]
     if status == "eligible_container":
         return "unknown_container_section", "Unknown container section pending boundary extraction"
     return "source_level_work", "Source-level work pending final work mapping"
@@ -162,7 +213,7 @@ def main() -> None:
         text = cleaned_path.read_text(encoding="utf-8", errors="replace")
         work_id, work_title = infer_work_fields(source_row)
         count = 0
-        for idx, start_word, end_word, start_char, end_char, passage in extract_windows(
+        for idx, start_word, end_word, start_char, end_char, passage in extract_sentence_aware_windows(
             text,
             int(config["preferred_words_per_passage"]),
             int(config["minimum_words_per_passage"]),
