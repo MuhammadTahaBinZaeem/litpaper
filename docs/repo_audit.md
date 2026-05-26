@@ -11,24 +11,33 @@
 
 Step 1 establishes the repository as a reproducible research workspace. It does **not** perform cleaning, passage extraction, rewriting, feature extraction, or analysis. Its job is to preserve the current source-state information, create the project skeleton, and define the rules for the remaining 19 steps.
 
-## Current repository state before Step 1 hardening
+## Current repository state after Step 1–3 consistency repair
 
-The repository was initialized with:
+The repository has been initialized and hardened with:
 
 - `README.md`
-- `metadata/source_inventory.csv`
-- `metadata/text_extraction_manifest.csv`
+- `.gitignore`
+- `requirements.txt`
+- `environment.yml`
+- `docs/repo_audit.md`
+- `docs/pipeline_20_steps.md`
+- `docs/data_dictionary.md`
+- `docs/reproducibility.md`
 - `docs/raw_source_handling.md`
-
-These files record the uploaded source archive inventory and the current limitation that large binary PDFs could not be uploaded through the available GitHub connector.
+- `metadata/source_inventory.csv`
+- `metadata/raw_file_checksums.csv`
+- `metadata/text_extraction_status_summary.csv`
+- `logs/step_01_status.md`
+- `logs/step_02_status.md`
+- `logs/raw_preservation_log.md`
 
 ## Uploaded source archive summary
 
-The uploaded archive inspected in this session was:
+The original uploaded archive inspected in this session was:
 
 - Local file: `/mnt/data/source.zip`
-- Files found: 27 PDFs
-- Total uncompressed PDF bytes: 162,141,311
+- Files found in original ZIP: 27 PDFs
+- Original ZIP PDF bytes: 162,141,311
 - Top-level archive folder: `source/`
 - Author folders detected:
   - `austenJane/`
@@ -38,13 +47,20 @@ The uploaded archive inspected in this session was:
   - `Marryshelly/`
   - `Oscarwilde/`
 
+Two additional Oscar Wilde PDFs were uploaded later, so the current tracked source inventory contains:
+
+- Current tracked PDFs: 29
+- Original ZIP PDFs: 27
+- Later uploaded Wilde PDFs: 2
+
 The detailed file-level inventory is stored in:
 
 - `metadata/source_inventory.csv`
+- `metadata/raw_file_checksums.csv`
 
 ## Raw PDF status
 
-Raw PDFs are **not yet committed into the repository**. The available GitHub connector in this chat can write UTF-8 text files but does not expose a direct local binary-file upload action for large PDFs. Because of this, Step 1 preserves traceability through file names, sizes, timestamps, and SHA256 checksums rather than pretending the PDF upload succeeded.
+Raw PDFs are **not yet committed into the repository** as binary files. The available GitHub connector in this chat can write UTF-8 text files but does not expose a direct local binary-file upload action for large PDFs. Because of this, Step 1 and Step 3 preserve traceability through file names, sizes, page counts, and SHA256 checksums rather than pretending the PDF upload succeeded.
 
 Recommended raw-PDF preservation route:
 
@@ -54,18 +70,34 @@ git lfs track "*.pdf"
 mkdir -p data/raw/pdf
 unzip source.zip -d /tmp/litpaper_source
 rsync -av /tmp/litpaper_source/source/ data/raw/pdf/
-git add .gitattributes data/raw/pdf metadata/source_inventory.csv
+# manually copy later uploaded Wilde PDFs into data/raw/pdf/Oscarwilde/
+git add .gitattributes data/raw/pdf metadata/source_inventory.csv metadata/raw_file_checksums.csv
 git commit -m "Add raw PDF sources via Git LFS"
 git push
 ```
 
 ## Text extraction status
 
-A preliminary local extraction attempt produced text-status metadata for the PDFs. The extraction status is stored in:
+A Step 3 extraction pass was performed locally using:
 
-- `metadata/text_extraction_manifest.csv`
+```text
+pdftotext -layout -enc UTF-8
+```
 
-Important: Step 1 does not treat these extracted texts as final research data. Text extraction, cleaning, and validation are handled later in the pipeline.
+Summary:
+
+- PDFs attempted: 29
+- Successful text extractions: 29
+- Failed or empty extractions: 0
+- Total extracted word count: 8,245,542
+- Total extracted text bytes: 44,782,448
+
+The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it contained stale `not_extracted_yet` rows after the source set changed. Current extraction status is stored in:
+
+- `metadata/text_extraction_status_summary.csv`
+- `logs/raw_preservation_log.md`
+
+Important: Step 3 still does not treat these extracted texts as final research data. Text cleaning and validation are handled later in the pipeline.
 
 ## Project skeleton added in Step 1
 
@@ -138,7 +170,6 @@ Step 1 is complete when the repository contains:
 - project README
 - raw source inventory
 - raw source handling note
-- text extraction status manifest
 - repository audit
 - 20-step pipeline protocol
 - initial data dictionary stub
@@ -150,12 +181,15 @@ Step 1 is complete when the repository contains:
 ## Step 1 limitations
 
 - Raw PDFs are inventoried but not physically uploaded through this connector.
-- Text extraction metadata is preliminary and not final.
 - No cleaned corpus exists yet.
 - No final passage dataset exists yet.
 - No LLM rewrites exist yet.
 - No stylometric features or results exist yet.
 
+## Step 1 completion judgment
+
+Step 1 is now internally consistent after the Step 3 source-status repair. The raw binary upload limitation remains documented rather than hidden.
+
 ## Next step
 
-Step 2 should create the formal author-work map from the source inventory and decide which works are eligible for the main six-author corpus.
+Step 4 should define and apply deterministic text cleaning rules after the Step 3 preservation state is finalized.
