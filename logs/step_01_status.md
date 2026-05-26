@@ -24,6 +24,7 @@ Complete and internally consistent after Step 3 source-state repair.
 - Added or updated source inventory and preservation metadata:
   - `metadata/source_inventory.csv`
   - `metadata/raw_file_checksums.csv`
+  - `metadata/extracted_text_checksums_by_id.csv`
   - `metadata/text_extraction_status_summary.csv`
 - Added directory placeholders for key dataset areas:
   - `data/raw/pdf/`
@@ -60,6 +61,7 @@ The exact file inventory and checksums are in:
 
 - `metadata/source_inventory.csv`
 - `metadata/raw_file_checksums.csv`
+- `metadata/extracted_text_checksums_by_id.csv`
 
 ## Known limitation
 
@@ -79,11 +81,12 @@ Current extraction summary:
 - Successful text extractions: 29
 - Failed or empty extractions: 0
 - Total extracted word count: 8,245,542
-- Total extracted text bytes: 44,782,448
+- Total extracted UTF-8 text bytes: 47,056,686
 
-The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it contained stale `not_extracted_yet` rows after the source set changed. Current extraction status is represented by:
+The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it contained stale extraction-state rows after the source set changed. Current extraction status is represented by:
 
 - `metadata/text_extraction_status_summary.csv`
+- `metadata/extracted_text_checksums_by_id.csv`
 - `logs/raw_preservation_log.md`
 
 ## Research direction locked
