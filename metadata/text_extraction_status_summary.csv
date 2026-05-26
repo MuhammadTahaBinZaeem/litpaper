@@ -6,9 +6,11 @@ text_extraction_tool,pdftotext -layout -enc UTF-8
 extracted_pdf_count,29
 failed_or_empty_pdf_count,0
 total_extracted_words,8245542
-total_extracted_text_bytes_utf8,44782448
+total_extracted_text_bytes_utf8,47056686
 raw_pdfs_committed_to_repo,false
 raw_pdf_binary_preservation_method_needed,git_lfs
+current_detailed_text_checksum_file,metadata/extracted_text_checksums_by_id.csv
+raw_checksum_file,metadata/raw_file_checksums.csv
 wilde_usable_source,Lord Arthur Savile and Other Stories PDF
 wilde_excluded_retelling,THE PICTURE OF DORIAN GRAY PDF
 wilde_excluded_drama_volume,Complete works of Oscar Wilde 1921 volume 6
