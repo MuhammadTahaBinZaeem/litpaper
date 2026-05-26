@@ -1,0 +1,8 @@
+artifact,path_or_location,stored_in_github,size_bytes,sha256,notes
+candidate_passages_csv,local_archive:data/interim/candidate_passages.csv,false,36992622,e43248da24b4686f4fe3f4122083283054ed9ec5b0bd54ae3c3afb8d15fed4c7,Full candidate CSV includes passage text and was packaged locally rather than committed inline.
+candidate_passage_metadata_csv,local_archive:metadata/candidate_passage_metadata.csv,false,3701644,8f4dbe7c2c4d394d5c96f538ab71d782e5ea0eafe3b67cb7aa1c6c08a599a833,Metadata CSV without passage text was generated locally and packaged; summary/counts committed.
+candidate_outputs_zip,sandbox:/mnt/data/litpaper_step7_candidate_outputs.zip,false,14165205,3f558ca0562e929a557e281dd6d405adf184816a7ee5419ef574e6d6c385da5f,Local handoff archive containing candidate CSV metadata CSV report and summary/count tables.
+candidate_generation_summary_csv,metadata/candidate_generation_summary.csv,true,498,,Committed summary table.
+candidate_counts_by_author_csv,metadata/candidate_counts_by_author.csv,true,232,,Committed author count table.
+candidate_counts_by_source_csv,metadata/candidate_counts_by_source.csv,true,2436,,Committed source count table.
+candidate_generation_report_md,logs/candidate_generation_report.md,true,1502,,Committed human-readable report.
