@@ -1,0 +1,55 @@
+{
+  "step": "Step 6 - Passage Extraction Protocol",
+  "version": "0.1.0",
+  "random_seed": 20260526,
+  "input_dir": "data/interim/cleaned_books",
+  "output_candidate_passages": "data/interim/candidate_passages.csv",
+  "output_candidate_metadata": "metadata/candidate_passage_metadata.csv",
+  "candidate_generation_report": "logs/candidate_generation_report.md",
+  "target_final_passages_per_author": 60,
+  "minimum_candidate_passages_per_author": 120,
+  "preferred_words_per_passage": 550,
+  "minimum_words_per_passage": 400,
+  "maximum_words_per_passage": 700,
+  "target_words_minimum": 450,
+  "target_words_maximum": 650,
+  "minimum_gap_words_same_source": 150,
+  "minimum_sentence_count": 5,
+  "long_sentence_word_threshold": 40,
+  "allowed_source_statuses": [
+    "eligible_main",
+    "eligible_backup",
+    "eligible_container",
+    "eligible_main_or_backup"
+  ],
+  "excluded_source_statuses": [
+    "excluded"
+  ],
+  "excluded_genres": [
+    "drama",
+    "poetry",
+    "essays",
+    "reviews",
+    "travel writing",
+    "biography",
+    "editorial introduction",
+    "advertisements",
+    "table of contents",
+    "index",
+    "retelling",
+    "adaptation"
+  ],
+  "candidate_status_values": [
+    "candidate_unreviewed",
+    "candidate_pass_length",
+    "candidate_fail_length",
+    "candidate_fail_source_excluded",
+    "candidate_fail_metadata_boundary",
+    "candidate_fail_low_sentence_count",
+    "candidate_fail_excessive_artifact_signal",
+    "selected_final",
+    "excluded_balance",
+    "excluded_manual_review"
+  ],
+  "extraction_rule_version": "passage_rules_v0.1.0"
+}
