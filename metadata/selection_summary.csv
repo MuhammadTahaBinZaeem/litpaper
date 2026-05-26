@@ -1,0 +1,13 @@
+metric,value
+selected_passages,360
+authors,6
+works,12
+selected_per_author,60
+selected_per_work,30
+min_word_count,550
+max_word_count,645
+mean_word_count,565.958
+candidate_source_rows,1879
+eligible_after_filters,1515
+selection_seed,not_used_deterministic_even_spread
+selection_status,complete
