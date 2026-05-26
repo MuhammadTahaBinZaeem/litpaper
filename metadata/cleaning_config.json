@@ -1,0 +1,47 @@
+{
+  "step": "Step 4 - Text Cleaning Rules and Metadata Removal",
+  "version": "0.1.0",
+  "input_dir": "data/raw/text_extracted",
+  "output_dir": "data/interim/cleaned_books",
+  "report_path": "logs/cleaning_report.csv",
+  "encoding": "utf-8",
+  "normalize_line_endings": true,
+  "remove_null_bytes": true,
+  "preserve_paragraph_breaks": true,
+  "max_consecutive_blank_lines": 2,
+  "collapse_repeated_spaces": true,
+  "repair_simple_hyphenated_line_breaks": true,
+  "preserve_punctuation": true,
+  "preserve_quotes": true,
+  "preserve_dashes": true,
+  "preserve_ellipses": true,
+  "preserve_dialect_spellings": true,
+  "preserve_archaic_spellings": true,
+  "remove_lines_matching": [
+    "^\\s*\\d+\\s*$",
+    "^\\s*Page\\s+\\d+\\s*$",
+    "^\\s*CHAPTER\\s*$"
+  ],
+  "front_back_matter_markers": [
+    "PROJECT GUTENBERG",
+    "END OF THE PROJECT GUTENBERG",
+    "PDF Room",
+    "Standard Ebooks",
+    "TABLE OF CONTENTS",
+    "CONTENTS",
+    "INDEX"
+  ],
+  "warning_thresholds": {
+    "max_character_loss_ratio": 0.35,
+    "max_word_loss_ratio": 0.35,
+    "min_cleaned_words": 1000
+  },
+  "author_style_protection": {
+    "austen": ["semicolons", "commas", "clause structure", "paragraph breaks"],
+    "poe": ["dashes", "exclamation marks", "semicolons", "punctuation intensity"],
+    "twain": ["dialect-like spelling", "contractions", "colloquial rhythm"],
+    "wilde": ["aphoristic sentence compression", "balanced punctuation", "short polished structures"],
+    "dickens": ["long sentences", "comma chains", "descriptive accumulation"],
+    "shelley": ["elevated diction", "archaic spelling", "Gothic register"]
+  }
+}
