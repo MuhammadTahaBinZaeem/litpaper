@@ -1,0 +1,8 @@
+metric,value
+cleaned_file_count,12
+total_raw_words,1373324
+total_cleaned_words,1373324
+total_raw_chars,7704947
+total_cleaned_chars,7603971
+total_removed_artifact_lines,0
+files_with_warning_flags,0
