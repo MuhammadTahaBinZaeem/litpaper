@@ -1,25 +1,18 @@
 """
 Fetch canonical Project Gutenberg plain-text sources.
 
-Purpose
--------
-This script migrates the corpus source layer from mixed PDF-derived text to
-canonical Project Gutenberg plain text wherever available.
-
-Run from repository root with internet access:
+Run from repository root:
 
     python scripts/04_fetch_gutenberg_sources.py
 
-Outputs
--------
+Outputs:
 - data/raw/gutenberg_texts/*.txt
 - metadata/gutenberg_raw_text_checksums.csv
 - logs/gutenberg_fetch_report.md
 
-Notes
------
-The script intentionally does not clean texts. Cleaning should be rerun with
-scripts/01_clean_texts.py after the Gutenberg raw text layer has been created.
+The script strips only Project Gutenberg boilerplate between the START/END
+markers. It preserves literary front matter, punctuation, quotation marks,
+dashes, dialect spellings, and archaic spellings for later stylometric use.
 """
 
 from __future__ import annotations
@@ -32,10 +25,12 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
-REGISTRY_PATH = Path("metadata/gutenberg_canonical_registry.csv")
-OUTPUT_DIR = Path("data/raw/gutenberg_texts")
-CHECKSUM_PATH = Path("metadata/gutenberg_raw_text_checksums.csv")
-REPORT_PATH = Path("logs/gutenberg_fetch_report.md")
+ROOT = Path(__file__).resolve().parents[1]
+REGISTRY_PATH = ROOT / "metadata/gutenberg_canonical_registry.csv"
+OUTPUT_DIR = ROOT / "data/raw/gutenberg_texts"
+CHECKSUM_PATH = ROOT / "metadata/gutenberg_raw_text_checksums.csv"
+REPORT_PATH = ROOT / "logs/gutenberg_fetch_report.md"
+WORD_RE = re.compile(r"\b[\w’'-]+\b", re.UNICODE)
 
 
 def sha256_text(text: str) -> str:
@@ -55,12 +50,6 @@ def fetch_text(url: str, timeout: int = 60) -> str:
 
 
 def strip_gutenberg_boilerplate(text: str) -> tuple[str, str, str]:
-    """Remove standard Gutenberg header/footer conservatively.
-
-    Returns cleaned_text, start_marker_status, end_marker_status.
-    Full literary front matter after START remains intact because later steps
-    may decide whether to keep prefaces/chapter headings.
-    """
     start_patterns = [
         r"\*\*\* START OF THE PROJECT GUTENBERG EBOOK .*?\*\*\*",
         r"\*\*\* START OF THIS PROJECT GUTENBERG EBOOK .*?\*\*\*",
@@ -69,25 +58,21 @@ def strip_gutenberg_boilerplate(text: str) -> tuple[str, str, str]:
         r"\*\*\* END OF THE PROJECT GUTENBERG EBOOK .*?\*\*\*",
         r"\*\*\* END OF THIS PROJECT GUTENBERG EBOOK .*?\*\*\*",
     ]
-
+    body = text.replace("\r\n", "\n").replace("\r", "\n").replace("\ufeff", "")
     start_status = "start_marker_not_found"
     end_status = "end_marker_not_found"
-    body = text.replace("\r\n", "\n").replace("\r", "\n")
-
     for pattern in start_patterns:
-        m = re.search(pattern, body, flags=re.IGNORECASE | re.DOTALL)
-        if m:
-            body = body[m.end():]
+        match = re.search(pattern, body, flags=re.IGNORECASE | re.DOTALL)
+        if match:
+            body = body[match.end():]
             start_status = "start_marker_removed"
             break
-
     for pattern in end_patterns:
-        m = re.search(pattern, body, flags=re.IGNORECASE | re.DOTALL)
-        if m:
-            body = body[:m.start()]
+        match = re.search(pattern, body, flags=re.IGNORECASE | re.DOTALL)
+        if match:
+            body = body[:match.start()]
             end_status = "end_marker_removed"
             break
-
     return body.strip() + "\n", start_status, end_status
 
 
@@ -96,28 +81,22 @@ def safe_filename(row: dict[str, str]) -> str:
 
 
 def count_words(text: str) -> int:
-    return len(re.findall(r"\b[\w’'-]+\b", text, flags=re.UNICODE))
+    return len(WORD_RE.findall(text))
 
 
 def main() -> int:
     if not REGISTRY_PATH.exists():
         print(f"Missing registry: {REGISTRY_PATH}", file=sys.stderr)
         return 1
-
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     CHECKSUM_PATH.parent.mkdir(parents=True, exist_ok=True)
     REPORT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
     rows = read_registry(REGISTRY_PATH)
     out_rows: list[dict[str, str | int]] = []
-    report_lines = [
-        "# Gutenberg Fetch Report",
-        "",
-        f"Run timestamp UTC: {datetime.now(timezone.utc).isoformat()}",
-        "",
-    ]
-
+    report_lines = ["# Gutenberg Fetch Report", "", f"Run timestamp UTC: {datetime.now(timezone.utc).isoformat()}", ""]
     failures = 0
+
     for row in rows:
         out_file = OUTPUT_DIR / safe_filename(row)
         try:
@@ -130,7 +109,7 @@ def main() -> int:
                 "work_id": row["work_id"],
                 "gutenberg_ebook_no": row["gutenberg_ebook_no"],
                 "plain_text_url": row["plain_text_url"],
-                "local_path": out_file.as_posix(),
+                "local_path": out_file.relative_to(ROOT).as_posix(),
                 "text_bytes_utf8": len(body.encode("utf-8")),
                 "chars": len(body),
                 "words": count_words(body),
@@ -148,7 +127,7 @@ def main() -> int:
                 "work_id": row["work_id"],
                 "gutenberg_ebook_no": row["gutenberg_ebook_no"],
                 "plain_text_url": row["plain_text_url"],
-                "local_path": out_file.as_posix(),
+                "local_path": out_file.relative_to(ROOT).as_posix(),
                 "text_bytes_utf8": 0,
                 "chars": 0,
                 "words": 0,
