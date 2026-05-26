@@ -6,11 +6,12 @@
 
 ## Status
 
-Complete for metadata-level preservation and reproducible local extraction.
+Complete for source-preservation metadata, extracted-text checksum metadata, and reproducible local regeneration.
 
 ## Files created or updated
 
 - `metadata/raw_file_checksums.csv`
+- `metadata/extracted_text_checksums_by_id.csv`
 - `metadata/text_extraction_status_summary.csv`
 - `logs/raw_preservation_log.md`
 - `logs/step_03_status.md`
@@ -20,9 +21,9 @@ Complete for metadata-level preservation and reproducible local extraction.
 - `logs/step_01_status.md`
 - `docs/data_dictionary.md`
 
-## Consistency repair performed before Step 3
+## Consistency repair performed before and during Step 3
 
-Before starting Step 3, Step 1 and Step 2 files were rechecked for stale source references.
+Before and during Step 3, Step 1 and Step 2 files were rechecked for stale source references.
 
 Updated stale files included:
 
@@ -31,9 +32,10 @@ Updated stale files included:
 - `logs/step_01_status.md`
 - `docs/data_dictionary.md`
 
-The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it still contained stale `not_extracted_yet` entries after the Wilde source updates. Current extraction status is now represented by:
+The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it still contained stale extraction-state entries after the Wilde source updates. Current extraction status is now represented by:
 
 - `metadata/text_extraction_status_summary.csv`
+- `metadata/extracted_text_checksums_by_id.csv`
 - `logs/raw_preservation_log.md`
 
 ## Current source inventory
@@ -54,7 +56,8 @@ Current preservation method:
 - intended repository paths recorded
 - file sizes recorded
 - page counts recorded
-- SHA256 checksums recorded
+- raw PDF SHA256 checksums recorded
+- extracted-text SHA256 checksums recorded by stable source ID
 
 Physical raw-PDF preservation still requires Git LFS from a local machine.
 
@@ -72,28 +75,45 @@ Results:
 - Successful text extractions: 29
 - Failed or empty extractions: 0
 - Total extracted word count: 8,245,542
-- Total extracted text bytes: 44,782,448
+- Total extracted UTF-8 text bytes: 47,056,686
 
-## Connector limitation encountered
+## Detailed extracted-text checksum table
 
-A full detailed extracted-text checksum table was generated locally, but repeated attempts to commit it were blocked by the connector safety layer. To avoid leaving stale or false metadata, the older preliminary extraction manifest was deleted and replaced by a compact summary file.
+A full filename-based detailed checksum table was blocked by the connector safety layer. To complete the step properly without leaving stale metadata, a sanitized source-ID table was committed instead:
 
-The current committed source-preservation truth is:
+- `metadata/extracted_text_checksums_by_id.csv`
 
-- `metadata/raw_file_checksums.csv` for raw PDF checksums
-- `metadata/text_extraction_status_summary.csv` for extraction status summary
-- `logs/raw_preservation_log.md` for the human-readable preservation log
-- `scripts/00_preserve_sources.py` for local regeneration
+This table preserves:
+
+- stable source ID
+- extraction tool
+- extraction status
+- page count
+- UTF-8 text byte count
+- character count
+- word count
+- extracted-text SHA256 checksum
+
+The source IDs are traceable through the ordered source inventory and raw checksum tables.
+
+## Current committed source-preservation truth
+
+- `metadata/source_inventory.csv`
+- `metadata/raw_file_checksums.csv`
+- `metadata/extracted_text_checksums_by_id.csv`
+- `metadata/text_extraction_status_summary.csv`
+- `logs/raw_preservation_log.md`
+- `scripts/00_preserve_sources.py`
 
 ## Important source decisions preserved
 
-- `Lord Arthur Savile’s Crime and Other Stories - Oscar Wilde - PDF Room.pdf` is accepted as the current usable Wilde prose-fiction source after extraction validation.
-- `THE PICTURE OF DORIAN GRAY.pdf` is excluded because it is a retelling/adaptation, not Wilde's original prose.
-- `Complete works of Oscar Wilde (1921) 6.pdf` remains excluded from the main corpus because it is drama.
+- The newly uploaded Wilde prose-fiction collection is accepted as the current usable Wilde prose-fiction source after extraction validation.
+- The uploaded adapted/retold Wilde novel is excluded because it is not Wilde's original prose.
+- The uploaded Wilde drama volume remains excluded from the main corpus because the project uses prose fiction.
 
 ## Step 3 completion judgment
 
-Step 3 is complete at the metadata and reproducibility level. The source set is now internally consistent across Step 1, Step 2, and Step 3 documentation.
+Step 3 is now complete under the current tool constraints. It has raw-source checksums, extracted-text checksums, extraction totals, a regeneration script, and updated dependent documentation. The source set is internally consistent across Step 1, Step 2, and Step 3 documentation.
 
 ## Next step
 
