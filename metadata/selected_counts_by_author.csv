@@ -1,0 +1,7 @@
+author_id,selected_passages,mean_words,min_words,max_words,mean_sentence_count
+austen,60,565.53,550,621,34.07
+dickens,60,564.62,550,610,36.35
+poe,60,566.28,550,645,26.4
+shelley,60,567.32,550,600,24.55
+twain,60,561.47,550,593,33.9
+wilde,60,566.53,550,638,38.0
