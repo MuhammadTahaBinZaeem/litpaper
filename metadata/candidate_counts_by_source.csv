@@ -1,0 +1,23 @@
+source_id,author_id,source_path,total,pass_length,fail_length,fail_low_sentence
+src_001_austen,austen,source/austenJane/_OceanofPDF.com_Complete_Works_Extras_-_Austen_Jane_compressed.pdf,1896,1896,0,0
+src_002_dickens,dickens,source/CharlesDicken/10-Hard-times-author-Charles-Dickens.pdf,143,143,0,0
+src_003_dickens,dickens,source/CharlesDicken/11-Dombey-and-Son-autor-Charles-Dickens.pdf,485,485,0,0
+src_004_dickens,dickens,source/CharlesDicken/12-Martin-Chuzzlewit-author-Charles-Dickens.pdf,461,461,0,0
+src_005_dickens,dickens,source/CharlesDicken/13-Our-Mutual-Friend-author-Charles-Dickens.pdf,448,448,0,0
+src_007_dickens,dickens,source/CharlesDicken/15-Barnaby-Rudge-author-Charles-Dickens.pdf,345,345,0,0
+src_009_dickens,dickens,source/CharlesDicken/17-The-Chimes-author-Charles-Dickens.pdf,42,42,0,0
+src_010_dickens,dickens,source/CharlesDicken/18-The-Cricket-on-the-Hearth-author-Charles-Dickens.pdf,43,43,0,0
+src_011_dickens,dickens,source/CharlesDicken/196.-Bleak-House-Author-Charles-Dickens.pdf,488,488,0,0
+src_012_dickens,dickens,source/CharlesDicken/2.-Oliver-Twist-Author-Charles-Dickens-compressed.pdf,215,215,0,0
+src_013_dickens,dickens,source/CharlesDicken/20-The-Old-Curiosity-Shop-author-Charles-Dickens.pdf,293,293,0,0
+src_015_dickens,dickens,source/CharlesDicken/4-David-Copperfield-author-Charles-Dickens.pdf,490,490,0,0
+src_016_dickens,dickens,source/CharlesDicken/7-The-Posthumous-Papers-of-the-Pickwick-Club-autor-Charles-Dickens.pdf,409,409,0,0
+src_017_dickens,dickens,source/CharlesDicken/8-Nicholas-Nickleby-autor-Charles-Dickens.pdf,434,434,0,0
+src_018_dickens,dickens,source/CharlesDicken/9-Little-Dorrit-author-Charles-Dickens.pdf,464,464,0,0
+src_019_dickens,dickens,source/CharlesDicken/a-christmas-carol-charles-dickens.pdf,40,40,0,0
+src_021_dickens,dickens,source/CharlesDicken/a-tale-of-two-cities-charles-dickens.pdf,188,188,0,0
+src_022_dickens,dickens,source/CharlesDicken/great-expectations-charles-dicken.pdf,254,254,0,0
+src_024_poe,poe,source/EdgarPoe/the-complete-works-of-edgar-allan-poe.pdf,804,804,0,0
+src_025_twain,twain,source/Marktwain/completeworksofm09twaiiala.pdf,153,153,0,0
+src_026_shelley,shelley,source/Marryshelly/delphi-complete-works-of-mary-shelley-mary-shelley-_shelley_-mary_-2013-Delphi-Classics-147fa34700ef.pdf,2268,2265,0,3
+src_028_wilde,wilde,source/Oscarwilde/Lord Arthur Savile’s Crime and Other Stories - Oscar Wilde - PDF Room.pdf,54,54,0,0
