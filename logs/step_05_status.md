@@ -6,7 +6,7 @@
 
 ## Status
 
-Complete.
+Complete after thorough audit correction.
 
 ## Files created or updated
 
@@ -38,17 +38,19 @@ The validation checks whole cleaned source texts, not final passages. It focuses
 
 ## Validation run result
 
+A later thorough audit corrected the eligibility count. The correct values are:
+
 - sources validated: 29
-- eligible/non-excluded sources validated: 24
-- excluded sources tracked but not treated as main corpus: 5
+- eligible/non-excluded sources validated: 22
+- excluded sources tracked but not treated as main corpus: 7
 - validation-flagged sources: 0
 
 ## Author-level results
 
-| Author | Validated source count | Result |
+| Author | Validated eligible source count | Result |
 |---|---:|---|
 | Austen | 1 | pass |
-| Dickens | 19 | pass |
+| Dickens | 17 | pass |
 | Poe | 1 | pass |
 | Shelley | 1 | pass |
 | Twain | 1 | pass |
@@ -69,7 +71,7 @@ The following tasks remain for later steps:
 ## Author-specific notes
 
 - Austen retains punctuation density, quotation structure, and controlled sentence rhythm.
-- Dickens retains long-sentence structure, comma density, quotation material, and descriptive-rhythm signals.
+- Dickens retains long-sentence structure, comma density, quotation material, and descriptive-rhythm signals across 17 eligible Dickens sources.
 - Poe retains punctuation density, dash/semicolon material, and sentence-rhythm variation.
 - Shelley retains long sentence structure, punctuation, and abstract/elevated lexical markers.
 - Twain retains quotation and apostrophe/contraction signals needed for colloquial-rhythm checks, but remains one-work limited.
