@@ -1,0 +1,3 @@
+uploaded_filename,size_bytes,pdf_pages,sha256,parsed_identity,step2_decision,reason
+Lord Arthur Savile’s Crime and Other Stories - Oscar Wilde - PDF Room.pdf,781662,105,b6b150e2f840f9e21440d08f64b87237ac618b5c61e61607071a8a72744281d5,Oscar Wilde prose fiction collection from Standard Ebooks / Project Gutenberg basis,usable_backup_source,Usable prose-fiction Wilde source; page 3 states Standard Ebooks basis and public-domain belief; supports Wilde aphoristic compression better than drama source.
+THE PICTURE OF DORIAN GRAY.pdf,736703,31,b3e306c6aaa341b43fdbabdf1559e02137c4f34831fecd01a0d6199a4ad96650,Oxford Bookworms 1989 retelling by Jill Nevile,exclude_main,Not Wilde's original prose; it is a simplified retelling and would corrupt authorial-style analysis.
