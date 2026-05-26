@@ -6,20 +6,24 @@
 
 ## Status
 
-Implemented as a deterministic, reproducible cleaning layer. Actual cleaned text generation is ready to run once extracted text files are present in `data/raw/text_extracted/` or regenerated locally from raw PDFs.
+Implemented and executed locally on the 29 extracted text sources. Cleaning reports and checksum metadata are committed. The full cleaned text files were generated locally and packaged as an archive, but they are not committed into the public GitHub repository because the source files include packaged editions and connector upload constraints apply.
 
 ## Files created or updated
 
 - `docs/cleaning_rules.md`
 - `metadata/cleaning_config.json`
 - `metadata/cleaning_report_schema.csv`
+- `metadata/cleaning_summary.csv`
+- `metadata/cleaned_text_checksums_by_id.csv`
 - `scripts/01_clean_texts.py`
 - `docs/data_dictionary.md`
+- `logs/cleaning_report.csv`
+- `logs/cleaning_output_summary.md`
 - `logs/step_04_status.md`
 
 ## What Step 4 implemented
 
-Step 4 added a conservative cleaning protocol designed for stylometric research. The cleaner removes obvious PDF/source artifacts while preserving authorial style signals.
+Step 4 added and ran a conservative cleaning protocol designed for stylometric research. The cleaner removes obvious PDF/source artifacts while preserving authorial style signals.
 
 The cleaner is designed to preserve:
 
@@ -44,6 +48,22 @@ The cleaner explicitly avoids:
 - modernizing spelling
 - sentence-tokenizing and destructively rejoining prose
 - removing semicolons/dashes/exclamation marks
+
+## Cleaning run results
+
+The cleaner was run locally against the Step 3 extracted text directory.
+
+Summary:
+
+- cleaned files: 29
+- total raw words: 8,245,542
+- total cleaned words: 8,235,425
+- total raw characters: 46,746,751
+- total cleaned characters: 46,089,342
+- removed artifact lines: 6,954
+- files with warning flags: 0
+- maximum word-loss ratio: 0.01103
+- maximum character-loss ratio: 0.313599
 
 ## Why conservative cleaning matters
 
@@ -82,34 +102,22 @@ Expected report:
 logs/cleaning_report.csv
 ```
 
-## Cleaning report schema
-
-The report schema is documented in:
-
-```text
-metadata/cleaning_report_schema.csv
-```
-
-It includes:
-
-- raw and cleaned character counts
-- raw and cleaned word counts
-- raw and cleaned line counts
-- removed artifact line count
-- character-loss ratio
-- word-loss ratio
-- warning flags
-
 ## Current limitation
 
-The extracted text files are not physically committed in GitHub yet. Step 3 preserved extraction checksums and status, and Step 4 now provides the deterministic cleaning layer. To run cleaning, the user must either:
+The cleaned text files were generated locally, but the full cleaned text corpus is not committed directly into this public GitHub repository. The committed reproducibility artifacts are:
 
-1. place/regenerate extracted text files under `data/raw/text_extracted/`, or
-2. add raw PDFs with Git LFS and run the preservation/extraction script before cleaning.
+- cleaning script
+- cleaning rules
+- cleaning configuration
+- cleaning report
+- cleaning summary
+- cleaned-text SHA256 checksums by stable source ID
+
+This is sufficient to audit and regenerate the cleaned outputs when raw/extracted text files are available locally or through Git LFS.
 
 ## Step 4 completion judgment
 
-Step 4 is complete as a reproducible cleaning-rule and script implementation. The actual cleaned text outputs are deferred until extracted text files are present in the repo or local working tree.
+Step 4 is complete at the reproducibility and metadata level. The actual cleaned text outputs were generated locally and checksummed; the public repo stores the audit trail and regeneration machinery rather than the full cleaned corpus.
 
 ## Next step
 
