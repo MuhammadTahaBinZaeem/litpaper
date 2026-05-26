@@ -1,0 +1,13 @@
+column,type,description
+source_text_path,string,Path to extracted raw text input used by the cleaner.
+cleaned_text_path,string,Path where the cleaned text output is written.
+raw_chars,integer,Character count before cleaning.
+cleaned_chars,integer,Character count after cleaning.
+raw_words,integer,Word count before cleaning using the project word-count regex.
+cleaned_words,integer,Word count after cleaning using the project word-count regex.
+raw_lines,integer,Line count before cleaning.
+cleaned_lines,integer,Line count after cleaning.
+removed_artifact_lines,integer,Number of lines removed by artifact-line filters.
+char_loss_ratio,float,Proportion of characters removed by cleaning.
+word_loss_ratio,float,Proportion of words removed by cleaning.
+warning_flags,string,Semicolon-separated warnings such as high_character_loss high_word_loss or low_cleaned_word_count.
