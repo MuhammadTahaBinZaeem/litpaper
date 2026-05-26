@@ -6,7 +6,7 @@
 
 ## Status
 
-Complete.
+Complete after verification fix.
 
 ## Files created or updated
 
@@ -16,6 +16,7 @@ Complete.
 - `scripts/03_extract_candidate_passages.py`
 - `docs/data_dictionary.md`
 - `logs/step_06_status.md`
+- `scripts/check_steps_01_06_consistency.py`
 
 ## What Step 6 did
 
@@ -75,6 +76,18 @@ Minimum gap:
 150 words between candidates from the same source
 ```
 
+## Sentence-boundary rule
+
+The protocol says extraction should avoid mid-sentence cuts where possible. A verification pass found that the first script scaffold used simple word windows. This was corrected.
+
+The committed extraction script now uses sentence-aware windows:
+
+```text
+scripts/03_extract_candidate_passages.py
+```
+
+The current scaffold accumulates full sentences until the preferred passage length is reached, applies hard word-count bounds, and advances by passage length plus the configured word gap to prevent overlap.
+
 ## Source eligibility rule
 
 Allowed source statuses:
@@ -95,7 +108,7 @@ Excluded source status:
 - Wilde has one usable prose source; the drama source and retelling remain excluded.
 - Final passage balance is not done in Step 6; it belongs to Step 8.
 
-## Script added
+## Script added and verified against protocol
 
 The extraction script scaffold is:
 
@@ -113,7 +126,7 @@ logs/candidate_generation_report.md
 
 ## Step 6 completion judgment
 
-Step 6 is complete. The passage extraction protocol is now specified well enough to proceed to Step 7 candidate passage pool generation.
+Step 6 is complete after the sentence-aware extraction fix. The passage extraction protocol and script scaffold are now specified well enough to proceed to Step 7 candidate passage pool generation.
 
 ## Next step
 
