@@ -1,0 +1,12 @@
+metric,value
+canonical_sources,12
+authors,6
+raw_fetch_status_ok,12
+cleaned_files,12
+validated_sources,12
+validation_flagged_sources,0
+candidate_rows,1879
+candidate_pass_length,1879
+authors_meeting_120_candidate_target,6
+authors_below_120_candidate_target,0
+balance_ready_for_step_8,true
