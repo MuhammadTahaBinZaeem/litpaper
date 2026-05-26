@@ -246,6 +246,67 @@ Important fields:
 - `excluded_source_statuses`
 - `extraction_rule_version`
 
+### `metadata/candidate_generation_summary.csv`
+
+Step 7 aggregate candidate generation summary.
+
+Expected columns:
+
+- `metric`
+- `value`
+
+Important metrics:
+
+- `candidate_rows`
+- `candidate_pass_length`
+- `candidate_fail_length`
+- `candidate_fail_low_sentence_count`
+- `candidate_passage_csv_bytes`
+- `candidate_passage_csv_sha256`
+- `candidate_metadata_csv_bytes`
+- `candidate_metadata_csv_sha256`
+- `authors_meeting_120_candidate_target`
+- `authors_below_120_candidate_target`
+
+### `metadata/candidate_counts_by_author.csv`
+
+Step 7 author-level candidate counts.
+
+Expected columns:
+
+- `author_id`
+- `candidate_pass_length`
+- `candidate_fail_length`
+- `candidate_fail_low_sentence_count`
+- `meets_120_target`
+
+### `metadata/candidate_counts_by_source.csv`
+
+Step 7 source-level candidate counts.
+
+Expected columns:
+
+- `source_id`
+- `author_id`
+- `source_path`
+- `total`
+- `pass_length`
+- `fail_length`
+- `fail_low_sentence`
+
+### `metadata/candidate_output_manifest.csv`
+
+Step 7 output manifest for candidate files and handoff archive.
+
+Expected columns:
+
+- `artifact`
+- `path_or_location`
+- `stored_in_github`
+- `size_bytes`
+- `sha256`
+- `notes`
+
 ## Current logs/reports
 
 - `logs/cleaning_report.csv` — Step 4 file-level cleaning report.
@@ -253,14 +314,26 @@ Important fields:
 - `logs/step_04_reproduction_verification.md` — Step 4 reproduction proof.
 - `logs/cleaning_validation_report.md` — Step 5 author-specific cleaning validation report.
 - `logs/step_06_status.md` — Step 6 passage-extraction protocol status report.
+- `logs/candidate_generation_report.md` — Step 7 candidate-generation report.
+- `logs/step_07_status.md` — Step 7 status and blocker report.
+
+## Generated but not directly committed full-size outputs
+
+The following Step 7 outputs were generated locally and packaged in the handoff archive:
+
+- `data/interim/candidate_passages.csv`
+- `metadata/candidate_passage_metadata.csv`
+
+They are tracked by checksum and byte size in:
+
+- `metadata/candidate_output_manifest.csv`
+- `metadata/candidate_generation_summary.csv`
 
 ## Future datasets
 
 The following datasets will be defined or generated in later steps:
 
 - `data/interim/cleaned_books/`
-- `data/interim/candidate_passages.csv`
-- `metadata/candidate_passage_metadata.csv`
 - `data/processed/original_passages.csv`
 - `data/final/master_text_dataset.csv`
 - `data/final/master_feature_dataset.csv`
@@ -280,4 +353,4 @@ The earlier preliminary `metadata/text_extraction_manifest.csv` was removed in S
 
 ## Step status
 
-Updated during Step 6. Not final.
+Updated during Step 7. Not final.
