@@ -1,0 +1,28 @@
+column,type,required,description
+candidate_id,string,true,Stable unique candidate passage ID.
+source_id,string,true,Stable source ID from metadata/source_id_map.csv.
+author_id,string,true,Author identifier.
+author_name,string,true,Human-readable author name.
+work_id,string,true,Work identifier; may initially be unknown_container_section before boundary assignment.
+work_title,string,true,Human-readable work title; may initially be unknown container section.
+source_path,string,true,Original source path from source map.
+candidate_index_within_source,integer,true,Sequential candidate number within source.
+start_word_index,integer,true,Start token index within cleaned source text.
+end_word_index,integer,true,End token index within cleaned source text.
+word_count,integer,true,Passage word count.
+sentence_count,integer,true,Approximate sentence count.
+paragraph_count,integer,true,Approximate paragraph count.
+start_char,integer,true,Start character offset within cleaned source text.
+end_char,integer,true,End character offset within cleaned source text.
+dialogue_marker_count,integer,true,Count of quotation marks/dialogue markers.
+dialogue_marker_per_1000w,float,true,Dialogue marker count normalized per 1000 words.
+punctuation_per_1000w,float,true,Total style-relevant punctuation normalized per 1000 words.
+semicolon_per_1000w,float,true,Semicolon count normalized per 1000 words.
+dash_per_1000w,float,true,Dash-like punctuation count normalized per 1000 words.
+apostrophe_per_1000w,float,true,Apostrophe/curly apostrophe count normalized per 1000 words.
+mean_sentence_words,float,true,Mean sentence length in words.
+long_sentence_ratio,float,true,Ratio of sentences with at least 40 words.
+extraction_rule_version,string,true,Version label for extraction rules.
+candidate_status,string,true,Initial candidate status.
+exclusion_reason,string,false,Reason if candidate is excluded or fails a rule.
+text,string,true,Candidate passage text.
