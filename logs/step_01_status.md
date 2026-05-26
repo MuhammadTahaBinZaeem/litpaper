@@ -6,7 +6,7 @@
 
 ## Status
 
-Substantially complete.
+Complete and internally consistent after Step 3 source-state repair.
 
 ## Completed
 
@@ -20,10 +20,11 @@ Substantially complete.
 - Added `docs/pipeline_20_steps.md`
 - Added `docs/data_dictionary.md`
 - Added `docs/reproducibility.md`
-- Preserved earlier source inventory files:
+- Added `docs/raw_source_handling.md`
+- Added or updated source inventory and preservation metadata:
   - `metadata/source_inventory.csv`
-  - `metadata/text_extraction_manifest.csv`
-  - `docs/raw_source_handling.md`
+  - `metadata/raw_file_checksums.csv`
+  - `metadata/text_extraction_status_summary.csv`
 - Added directory placeholders for key dataset areas:
   - `data/raw/pdf/`
   - `data/raw/text_extracted/`
@@ -37,7 +38,7 @@ Substantially complete.
 
 ## Uploaded source archive audit
 
-The uploaded `source.zip` was inspected locally and contains:
+The original uploaded `source.zip` was inspected locally and contained:
 
 - 27 PDF files
 - 162,141,311 total uncompressed bytes
@@ -49,11 +50,41 @@ The uploaded `source.zip` was inspected locally and contains:
   - `Marryshelly/`
   - `Oscarwilde/`
 
-The exact file inventory and checksums are in `metadata/source_inventory.csv`.
+Two additional Oscar Wilde PDFs were uploaded later. The current tracked source inventory is now:
+
+- 29 tracked PDF files
+- 27 original ZIP PDFs
+- 2 later uploaded Wilde PDFs
+
+The exact file inventory and checksums are in:
+
+- `metadata/source_inventory.csv`
+- `metadata/raw_file_checksums.csv`
 
 ## Known limitation
 
-The raw PDFs are inventoried but not uploaded into the repository through this connector. The connector available in this chat can create/update UTF-8 files but does not provide a direct local binary upload stream for large PDFs. Use Git LFS from a local machine for raw-PDF preservation if needed.
+The raw PDFs are inventoried but not uploaded into the repository through this connector. The connector available in this chat can create/update UTF-8 files but does not provide a direct local binary upload stream for large PDFs. Use Git LFS from a local machine for physical raw-PDF preservation.
+
+## Text extraction status after Step 3
+
+A local extraction pass was performed using:
+
+```text
+pdftotext -layout -enc UTF-8
+```
+
+Current extraction summary:
+
+- PDFs attempted: 29
+- Successful text extractions: 29
+- Failed or empty extractions: 0
+- Total extracted word count: 8,245,542
+- Total extracted text bytes: 44,782,448
+
+The earlier preliminary `metadata/text_extraction_manifest.csv` was removed because it contained stale `not_extracted_yet` rows after the source set changed. Current extraction status is represented by:
+
+- `metadata/text_extraction_status_summary.csv`
+- `logs/raw_preservation_log.md`
 
 ## Research direction locked
 
@@ -86,13 +117,13 @@ Mandatory methods:
 - statistical testing
 - author-specific literary interpretation
 
-## Deferred to Step 2
+## Deferred to Step 2 and later
 
-- Exact author-work map
-- Work inclusion/exclusion decisions
-- Identification of which PDFs/books are eligible for the main corpus
-- Repair/recheck of failed text extraction files
+- Exact author-work map: completed in Step 2
+- Work inclusion/exclusion decisions: completed in Step 2 and updated after Wilde source additions
+- Raw/extracted state preservation: completed at metadata level in Step 3
+- Cleaning and validation: deferred to Step 4
 
 ## Step 1 completion judgment
 
-Step 1 has created the audit base and project skeleton needed for Step 2. The only unresolved issue is raw PDF binary upload, which is documented rather than hidden.
+Step 1 has created the audit base and project skeleton needed for the rest of the pipeline. It is now internally consistent with the later Wilde source additions and Step 3 preservation state.
