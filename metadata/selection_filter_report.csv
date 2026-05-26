@@ -1,0 +1,13 @@
+author_id,work_id,raw_candidates,eligible_after_filters,selected
+austen,emma,220,195,30
+austen,pride_and_prejudice,175,96,30
+dickens,great_expectations,254,213,30
+dickens,oliver_twist,217,179,30
+poe,works_volume_1,124,91,30
+poe,works_volume_2,131,109,30
+shelley,frankenstein,103,91,30
+shelley,the_last_man,239,210,30
+twain,huckleberry_finn,153,133,30
+twain,tom_sawyer,99,80,30
+wilde,dorian_gray,110,97,30
+wilde,lord_arthur_stories,54,41,30
