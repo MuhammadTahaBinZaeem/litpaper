@@ -1,0 +1,7 @@
+author_id,validated_source_count,total_cleaned_words,mean_punctuation_per_1000w,mean_sentence_words,mean_long_sentence_ratio,mean_semicolon_per_1000w,mean_dash_per_1000w,mean_quote_mark_per_1000w,mean_apostrophe_per_1000w,mean_contraction_per_1000w,result
+austen,2,287999,205.329,16.242,0.076247,14.013,11.328,34.875,6.455,5.802,pass
+dickens,2,344075,249.85,16.056,0.082155,11.722,5.319,64.185,15.596,14.212,pass
+poe,2,187710,176.369,21.652,0.136611,7.587,12.075,19.164,4.889,2.99,pass
+shelley,2,250871,156.482,23.477,0.132381,15.384,4.354,12.3,2.531,2.167,pass
+twain,2,183892,246.827,16.182,0.07662,11.463,11.501,77.137,41.008,34.931,pass
+wilde,2,118777,206.784,14.887,0.058666,3.839,2.69,44.452,16.265,9.174,pass
