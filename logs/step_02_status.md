@@ -6,13 +6,16 @@
 
 ## Status
 
-Complete, with one important source gap.
+Complete, with Wilde source gap partially repaired after additional uploads.
 
-## Files created
+## Files created or updated
 
 - `metadata/author_work_map.csv`
 - `metadata/source_item_review.csv`
+- `metadata/source_inventory.csv`
+- `metadata/wilde_new_source_review.csv`
 - `docs/corpus_selection_rationale.md`
+- `docs/wilde_source_addendum.md`
 - `logs/step_02_status.md`
 
 ## What Step 2 did
@@ -44,7 +47,7 @@ Each passage should later be extracted at approximately:
 450–650 words
 ```
 
-## Main work candidates after Step 2
+## Main work candidates after Step 2 update
 
 | Author | Main candidate works/status |
 |---|---|
@@ -53,23 +56,43 @@ Each passage should later be extracted at approximately:
 | Edgar Allan Poe | selected prose fiction tales from complete-works PDF |
 | Mark Twain | `Adventures of Huckleberry Finn` from uploaded volume |
 | Mary Shelley | `Frankenstein` 1818 and `The Last Man` from complete-works PDF |
-| Oscar Wilde | **source gap:** current PDF appears to be drama, not prose fiction |
+| Oscar Wilde | `Lord Arthur Savile’s Crime and Other Stories` from newly uploaded prose-fiction PDF |
 
-## Major finding
+## Wilde source update
 
-The uploaded Oscar Wilde PDF appears to be a drama volume beginning with `Lady Windermere's Fan`. Since the main corpus is prose fiction, this source is not suitable for the main study.
+The earlier Wilde source gap is now partially repaired.
 
-Required fix before final passage extraction:
-
-```text
-Add a public-domain prose fiction source for Oscar Wilde, preferably The Picture of Dorian Gray.
-```
-
-Desired backup:
+New usable Wilde source:
 
 ```text
-Lord Arthur Savile's Crime and Other Stories
+Lord Arthur Savile’s Crime and Other Stories - Oscar Wilde - PDF Room.pdf
 ```
+
+This is accepted as a usable prose-fiction Wilde source after extraction validation.
+
+Still excluded:
+
+```text
+Complete works of Oscar Wilde (1921) 6.pdf
+```
+
+Reason: drama volume, not suitable for the main prose-fiction corpus.
+
+Also excluded:
+
+```text
+THE PICTURE OF DORIAN GRAY.pdf
+```
+
+Reason: Oxford Bookworms 1989 retelling by Jill Nevile, not Wilde's original prose. It must not be used for authorial-style analysis.
+
+Remaining desired source gap:
+
+```text
+Original public-domain The Picture of Dorian Gray
+```
+
+This remains preferred but is not currently available in the repo.
 
 ## Other notes
 
@@ -82,4 +105,4 @@ Lord Arthur Savile's Crime and Other Stories
 
 Step 2 is complete because the repository now contains a formal author-work map, source-level decisions, and corpus-selection rationale.
 
-The project may proceed to Step 3, but Wilde should be treated as a known source gap until a proper prose-fiction source is added.
+The project may proceed to Step 3. Wilde is no longer completely missing, but the preferred original *Dorian Gray* source is still absent and the uploaded retelling is excluded.
