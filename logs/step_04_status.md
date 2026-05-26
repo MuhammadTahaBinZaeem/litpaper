@@ -6,7 +6,7 @@
 
 ## Status
 
-Implemented and executed locally on the 29 extracted text sources. Cleaning reports and checksum metadata are committed. The full cleaned text files were generated locally and packaged as an archive, but they are not committed into the public GitHub repository because the source files include packaged editions and connector upload constraints apply.
+Implemented, executed locally on the 29 extracted text sources, and reproduction-verified. Cleaning reports, checksum metadata, and script-verification proof are committed. The full cleaned text files were generated locally and packaged as an archive, but they are not committed into the public GitHub repository because the source files include packaged editions and connector upload constraints apply.
 
 ## Files created or updated
 
@@ -20,6 +20,7 @@ Implemented and executed locally on the 29 extracted text sources. Cleaning repo
 - `logs/cleaning_report.csv`
 - `logs/cleaning_output_summary.md`
 - `logs/step_04_status.md`
+- `logs/step_04_reproduction_verification.md`
 
 ## What Step 4 implemented
 
@@ -65,6 +66,23 @@ Summary:
 - maximum word-loss ratio: 0.01103
 - maximum character-loss ratio: 0.313599
 
+## Reproduction verification
+
+The committed `scripts/01_clean_texts.py` and `metadata/cleaning_config.json` were run in a fresh local verification directory against the Step 3 extracted texts. The regenerated cleaned files were compared against the previously generated Step 4 cleaned outputs.
+
+Verification result:
+
+- cleaned files compared: 29
+- exact SHA256 matches: 29
+- mismatches: 0
+- regenerated cleaning report matched previous cleaning report: yes
+
+Full verification record:
+
+```text
+logs/step_04_reproduction_verification.md
+```
+
 ## Why conservative cleaning matters
 
 The paper studies authorial style separability. Over-cleaning would damage the exact signals needed for later experiments, especially:
@@ -78,7 +96,7 @@ The paper studies authorial style separability. Over-cleaning would damage the e
 
 ## Cleaning script
 
-The cleaning script is:
+The verified cleaning script is:
 
 ```text
 scripts/01_clean_texts.py
@@ -112,12 +130,13 @@ The cleaned text files were generated locally, but the full cleaned text corpus 
 - cleaning report
 - cleaning summary
 - cleaned-text SHA256 checksums by stable source ID
+- reproduction verification log
 
 This is sufficient to audit and regenerate the cleaned outputs when raw/extracted text files are available locally or through Git LFS.
 
 ## Step 4 completion judgment
 
-Step 4 is complete at the reproducibility and metadata level. The actual cleaned text outputs were generated locally and checksummed; the public repo stores the audit trail and regeneration machinery rather than the full cleaned corpus.
+Step 4 is complete at the reproducibility and metadata level. The actual cleaned text outputs were generated locally, checksummed, and reproduction-verified using the committed script and committed configuration; the public repo stores the audit trail and regeneration machinery rather than the full cleaned corpus.
 
 ## Next step
 
