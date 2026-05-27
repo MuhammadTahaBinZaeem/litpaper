@@ -1,0 +1,5 @@
+condition,condition_order,severity,main_experiment,description
+original,0,none,true,Selected source passage from Step 8; not rewritten.
+paraphrase,1,light,true,Meaning-preserving wording and phrasing change without modernization or simplification as the primary goal.
+modernize,2,medium,true,Contemporary-English rewrite preserving content and narrative sequence while updating older phrasing and register.
+simplify,3,heavy,true,Easier-to-read rewrite preserving same events and meaning while simplifying syntax and diction.
