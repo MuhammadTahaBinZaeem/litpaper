@@ -1,0 +1,20 @@
+column,type,required,description
+passage_id,string,true,Stable Step 8 selected original passage ID.
+condition,string,true,Rewrite condition: paraphrase modernize or simplify.
+rewritten_text,string,true,Controlled rewritten prose passage.
+model_provider,string,true,LLM provider used for generation.
+model_name,string,true,Model name used for generation.
+model_version_or_snapshot,string,false,Provider-specific model version or snapshot if available.
+temperature,float,true,Generation temperature.
+top_p,float,true,Generation top_p setting.
+seed_if_available,string,false,Seed value if the provider supports deterministic seeding.
+prompt_template_id,string,true,Prompt template identifier.
+prompt_template_sha256,string,true,SHA256 hash of the prompt template text.
+source_text_sha256,string,true,SHA256 of original selected passage text.
+rewritten_text_sha256,string,true,SHA256 of rewritten text.
+original_word_count,integer,true,Word count of the selected original passage.
+rewritten_word_count,integer,true,Word count of rewritten text.
+length_ratio,float,true,rewritten_word_count divided by original_word_count.
+qc_status,string,true,pass warning or fail.
+qc_flags,string,false,Semicolon-separated QC flags.
+created_utc,string,true,UTC creation timestamp.
