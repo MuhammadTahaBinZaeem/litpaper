@@ -1,0 +1,18 @@
+Rewrite the passage as a light paraphrase.
+
+Requirements:
+- Preserve the same meaning, events, characters, objects, and sequence.
+- Change wording and local phrasing.
+- Do not modernize older style as the main goal.
+- Do not simplify aggressively.
+- Preserve paragraph structure where reasonably possible.
+- Keep the rewritten passage within approximately 15 percent of the original word count.
+
+Return only valid JSON.
+
+passage_id: {passage_id}
+condition: paraphrase
+original_word_count: {word_count}
+
+Passage:
+{text}
