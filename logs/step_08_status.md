@@ -2,7 +2,20 @@
 
 ## Status
 
-Complete locally and reproducible from committed scripts.
+Complete as a local/reproducible Step 8 output, but not fully repository-contained yet.
+
+## Recheck result
+
+A recheck confirmed that Step 8 summaries, counts, manifest, and scripts are committed to GitHub. However, the full text-bearing selected passage files listed in `metadata/step8_output_manifest.csv` are not currently committed to GitHub.
+
+Therefore the correct status is:
+
+```text
+Step 8 selection logic: complete
+Step 8 local artifacts: complete
+Step 8 GitHub summaries/manifests/scripts: complete
+Step 8 full text-bearing files in GitHub: pending
+```
 
 ## Input
 
@@ -54,27 +67,10 @@ From each work, 30 candidates are selected by evenly spreading selection across 
 - Wilde / The Picture of Dorian Gray: 30
 - Wilde / Lord Arthur Savile stories: 30
 
-## Outputs
-
-Generated locally:
-
-- `data/processed/selected_original_passages.csv`
-- `metadata/selected_original_passage_metadata.csv`
-- `metadata/selected_counts_by_author.csv`
-- `metadata/selected_counts_by_work.csv`
-- `metadata/selection_summary.csv`
-- `metadata/selection_filter_report.csv`
-- `metadata/step8_output_manifest.csv`
-- `data/processed/selected_passages_md/selected_passages_austen.md`
-- `data/processed/selected_passages_md/selected_passages_dickens.md`
-- `data/processed/selected_passages_md/selected_passages_poe.md`
-- `data/processed/selected_passages_md/selected_passages_shelley.md`
-- `data/processed/selected_passages_md/selected_passages_twain.md`
-- `data/processed/selected_passages_md/selected_passages_wilde.md`
-
-Committed to GitHub:
+## Committed to GitHub
 
 - `scripts/07_select_final_passages.py`
+- `scripts/check_step_08_selection.py`
 - `metadata/selection_summary.csv`
 - `metadata/selected_counts_by_author.csv`
 - `metadata/selected_counts_by_work.csv`
@@ -82,12 +78,29 @@ Committed to GitHub:
 - `metadata/step8_output_manifest.csv`
 - `logs/step_08_status.md`
 
+## Generated locally but not yet committed to GitHub
+
+- `data/processed/selected_original_passages.csv`
+- `metadata/selected_original_passage_metadata.csv`
+- `metadata/selected_passage_md_manifest.csv`
+- `data/processed/selected_passages_md/selected_passages_austen.md`
+- `data/processed/selected_passages_md/selected_passages_dickens.md`
+- `data/processed/selected_passages_md/selected_passages_poe.md`
+- `data/processed/selected_passages_md/selected_passages_shelley.md`
+- `data/processed/selected_passages_md/selected_passages_twain.md`
+- `data/processed/selected_passages_md/selected_passages_wilde.md`
+
 ## Text-bearing artifact handling
 
-The selected original-passage CSV and the six author Markdown files include full passage text. They were generated locally and packaged as a handoff archive. They are reproducible from the committed script.
+The selected original-passage CSV and six author Markdown files include full passage text. They were generated locally and packaged as a handoff archive. They are reproducible from the committed script.
 
-Because normal connector text writes are fragile for large text-bearing files, the repository stores the generator script, counts, hashes, and manifest. The full text-bearing selected passages are available in the local archive.
+For final repository containment, add the text-bearing files by one of these routes:
+
+1. commit them manually from the local ZIP/output folder;
+2. use Git LFS;
+3. attach them to a GitHub release;
+4. keep the ZIP artifact as the data handoff and cite its checksums.
 
 ## Completion judgment
 
-Step 8 is complete for the original-passage layer. The selected original passages are ready for later rewriting conditions: paraphrase, modernize, and simplify.
+Step 8 is complete for selection logic and local artifact generation. It is not yet fully repository-contained until the text-bearing selected passage files are committed or attached as a release/artifact.
