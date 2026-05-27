@@ -1,0 +1,19 @@
+Rewrite the passage in contemporary English.
+
+Requirements:
+- Preserve the same meaning, events, characters, objects, and sequence.
+- Update older or archaic phrasing into natural modern English.
+- Preserve the general seriousness, emotion, and narrative situation.
+- Do not summarize.
+- Do not simplify more than necessary.
+- Preserve paragraph structure where reasonably possible.
+- Keep the rewritten passage within approximately 15 percent of the original word count.
+
+Return only valid JSON.
+
+passage_id: {passage_id}
+condition: modernize
+original_word_count: {word_count}
+
+Passage:
+{text}
