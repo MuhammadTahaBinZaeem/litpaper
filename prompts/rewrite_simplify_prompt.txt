@@ -1,0 +1,19 @@
+Rewrite the passage so it is easier to read for a general modern reader.
+
+Requirements:
+- Preserve the same meaning, events, characters, objects, and sequence.
+- Simplify difficult sentence structures and difficult wording.
+- Do not summarize.
+- Do not turn the passage into bullet points.
+- Do not make it childish or informal unless the original situation requires it.
+- Preserve paragraph structure where reasonably possible.
+- Keep the rewritten passage within approximately 15 percent of the original word count.
+
+Return only valid JSON.
+
+passage_id: {passage_id}
+condition: simplify
+original_word_count: {word_count}
+
+Passage:
+{text}
