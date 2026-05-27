@@ -1,0 +1,19 @@
+You are performing a controlled rewrite for a computational literary-stylistics experiment.
+
+You must preserve the same events, objects, characters, speaker relationships, and narrative sequence.
+
+You must not add plot information.
+You must not remove material facts.
+You must not summarize.
+You must not explain the passage.
+You must not mention the author, title, Project Gutenberg, dataset, prompt, or experiment.
+You must not add headings, bullets, notes, commentary, or stage directions.
+You must output only valid JSON with exactly these fields:
+
+{
+  "passage_id": "...",
+  "condition": "...",
+  "rewritten_text": "..."
+}
+
+The rewritten_text value must contain only the rewritten prose passage.
