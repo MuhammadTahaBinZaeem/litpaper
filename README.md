@@ -72,6 +72,18 @@ Total: 360 selected original passages
 
 Each author contributes two works. Each work contributes 30 selected passages.
 
+### Controlled rewriting protocol
+
+Step 9 defines the controlled rewriting protocol for:
+
+```text
+paraphrase
+modernize
+simplify
+```
+
+Step 9 does not generate rewrites. It freezes prompt templates, output schema, generation settings, request-preparation logic, and QC rules before Step 10.
+
 ## Important generated files
 
 ### Source/provenance
@@ -141,6 +153,22 @@ metadata/selected_passage_md_manifest.csv
 
 Step 8 is fully repository-contained.
 
+### Controlled rewriting protocol
+
+```text
+docs/rewrite_protocol.md
+metadata/rewrite_condition_registry.csv
+metadata/rewrite_generation_config.json
+metadata/rewrite_output_schema.csv
+prompts/rewrite_system_prompt.txt
+prompts/rewrite_paraphrase_prompt.txt
+prompts/rewrite_modernize_prompt.txt
+prompts/rewrite_simplify_prompt.txt
+scripts/08_prepare_rewrite_requests.py
+scripts/09_validate_rewrite_outputs.py
+logs/step_09_status.md
+```
+
 ## Rebuild commands
 
 From a fresh clone with internet access:
@@ -151,6 +179,7 @@ python scripts/05_run_canonical_migration.py
 python scripts/06_export_gutenberg_candidates_md.py
 python scripts/check_gutenberg_steps_01_07_consistency.py
 python scripts/07_select_final_passages.py
+python scripts/08_prepare_rewrite_requests.py
 ```
 
 Expected Step 1–7 checker result:
@@ -163,6 +192,12 @@ Expected Step 8 result:
 
 ```text
 360 selected original passages
+```
+
+Expected Step 9 request-preparation result:
+
+```text
+1080 rewrite requests
 ```
 
 ## Change record
@@ -209,6 +244,10 @@ Selected 360 original passages: 60 per author, 30 per work, across 12 canonical 
 
 The full selected-passage CSV, Markdown exports, metadata manifest, and packaged ZIP are committed in this repository. Step 8 is fully repository-contained.
 
+### Step 9 — Controlled rewriting prompt protocol
+
+Defined the three rewrite conditions, blinded prompt templates, JSON output schema, generation settings, request-preparation script, and rewrite QC validation script.
+
 ## Next step
 
-Proceed to **Step 9 — controlled rewriting prompt protocol** for paraphrase, modernize, and simplify conditions.
+Proceed to **Step 10 — rewrite request preparation and controlled rewrite generation**.
