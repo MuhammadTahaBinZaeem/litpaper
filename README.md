@@ -129,12 +129,17 @@ metadata/step8_output_manifest.csv
 logs/step_08_status.md
 ```
 
-The final selected passage text is generated locally into:
+The final selected passage text and its handoff archive are now stored explicitly in the repository:
 
 ```text
+artifacts/step8/litpaper_step8_selected_passages.zip
 data/processed/selected_original_passages.csv
 data/processed/selected_passages_md/
+metadata/selected_original_passage_metadata.csv
+metadata/selected_passage_md_manifest.csv
 ```
+
+Step 8 is fully repository-contained.
 
 ## Rebuild commands
 
@@ -201,6 +206,8 @@ Added a script to export the full Gutenberg candidate text into chunked Markdown
 ### Step 8 — Final balanced original-passage selection
 
 Selected 360 original passages: 60 per author, 30 per work, across 12 canonical Gutenberg works. The selected original layer is ready for controlled rewriting conditions.
+
+The full selected-passage CSV, Markdown exports, metadata manifest, and packaged ZIP are committed in this repository. Step 8 is fully repository-contained.
 
 ## Next step
 

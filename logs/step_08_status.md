@@ -2,11 +2,11 @@
 
 ## Status
 
-Complete as a local/reproducible Step 8 output, but not fully repository-contained yet.
+Complete and fully repository-contained.
 
 ## Recheck result
 
-A recheck confirmed that Step 8 summaries, counts, manifest, and scripts are committed to GitHub. However, the full text-bearing selected passage files listed in `metadata/step8_output_manifest.csv` are not currently committed to GitHub.
+A recheck confirmed that Step 8 summaries, counts, manifests, scripts, text-bearing selected passage files, and packaged ZIP are stored in the repository.
 
 Therefore the correct status is:
 
@@ -14,7 +14,8 @@ Therefore the correct status is:
 Step 8 selection logic: complete
 Step 8 local artifacts: complete
 Step 8 GitHub summaries/manifests/scripts: complete
-Step 8 full text-bearing files in GitHub: pending
+Step 8 full text-bearing files in GitHub: complete
+Step 8 packaged ZIP in GitHub: complete
 ```
 
 ## Input
@@ -78,7 +79,7 @@ From each work, 30 candidates are selected by evenly spreading selection across 
 - `metadata/step8_output_manifest.csv`
 - `logs/step_08_status.md`
 
-## Generated locally but not yet committed to GitHub
+## Text-bearing artifacts committed to GitHub
 
 - `data/processed/selected_original_passages.csv`
 - `metadata/selected_original_passage_metadata.csv`
@@ -89,18 +90,12 @@ From each work, 30 candidates are selected by evenly spreading selection across 
 - `data/processed/selected_passages_md/selected_passages_shelley.md`
 - `data/processed/selected_passages_md/selected_passages_twain.md`
 - `data/processed/selected_passages_md/selected_passages_wilde.md`
+- `artifacts/step8/litpaper_step8_selected_passages.zip`
 
 ## Text-bearing artifact handling
 
-The selected original-passage CSV and six author Markdown files include full passage text. They were generated locally and packaged as a handoff archive. They are reproducible from the committed script.
-
-For final repository containment, add the text-bearing files by one of these routes:
-
-1. commit them manually from the local ZIP/output folder;
-2. use Git LFS;
-3. attach them to a GitHub release;
-4. keep the ZIP artifact as the data handoff and cite its checksums.
+The selected original-passage CSV and six author Markdown files include full passage text. They are committed alongside the handoff archive and remain reproducible from the committed script.
 
 ## Completion judgment
 
-Step 8 is complete for selection logic and local artifact generation. It is not yet fully repository-contained until the text-bearing selected passage files are committed or attached as a release/artifact.
+Step 8 is complete for selection logic, local artifact generation, and repository-contained storage.
