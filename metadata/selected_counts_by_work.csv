@@ -1,13 +1,13 @@
 author_id,work_id,work_title,selected_passages,mean_words,min_words,max_words
-austen,emma,Emma,30,563.87,550,621
-austen,pride_and_prejudice,Pride and Prejudice,30,567.2,550,606
-dickens,great_expectations,Great Expectations,30,563.27,550,610
-dickens,oliver_twist,Oliver Twist,30,565.97,550,594
-poe,works_volume_1,The Works of Edgar Allan Poe Volume 1,30,566.3,550,645
-poe,works_volume_2,The Works of Edgar Allan Poe Volume 2,30,566.27,550,629
-shelley,frankenstein,Frankenstein or The Modern Prometheus,30,568.13,550,600
-shelley,the_last_man,The Last Man,30,566.5,550,597
-twain,huckleberry_finn,Adventures of Huckleberry Finn,30,562.6,550,593
-twain,tom_sawyer,The Adventures of Tom Sawyer,30,560.33,550,585
-wilde,dorian_gray,The Picture of Dorian Gray,30,565.83,550,638
-wilde,lord_arthur_stories,Lord Arthur Savile's Crime and Other Stories,30,567.23,550,618
+austen,emma,Emma,30,566.0,550,621
+austen,pride_and_prejudice,Pride and Prejudice,30,565.07,550,585
+dickens,great_expectations,Great Expectations,30,563.97,550,594
+dickens,oliver_twist,Oliver Twist,30,565.27,550,610
+poe,works_volume_1,The Works of Edgar Allan Poe Volume 1,30,563.37,550,593
+poe,works_volume_2,The Works of Edgar Allan Poe Volume 2,30,569.2,550,645
+shelley,frankenstein,Frankenstein or The Modern Prometheus,30,567.63,552,591
+shelley,the_last_man,The Last Man,30,567.0,550,600
+twain,huckleberry_finn,Adventures of Huckleberry Finn,30,560.87,550,593
+twain,tom_sawyer,The Adventures of Tom Sawyer,30,562.07,551,593
+wilde,dorian_gray,The Picture of Dorian Gray,30,561.73,550,638
+wilde,lord_arthur_stories,Lord Arthur Savile's Crime and Other Stories,30,571.33,550,618
