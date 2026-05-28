@@ -166,6 +166,7 @@ prompts/rewrite_modernize_prompt.txt
 prompts/rewrite_simplify_prompt.txt
 scripts/08_prepare_rewrite_requests.py
 scripts/09_validate_rewrite_outputs.py
+scripts/check_step_09_protocol.py
 logs/step_09_status.md
 ```
 
@@ -179,6 +180,8 @@ python scripts/05_run_canonical_migration.py
 python scripts/06_export_gutenberg_candidates_md.py
 python scripts/check_gutenberg_steps_01_07_consistency.py
 python scripts/07_select_final_passages.py
+python scripts/check_step_08_selection.py
+python scripts/check_step_09_protocol.py
 python scripts/08_prepare_rewrite_requests.py
 ```
 
@@ -188,10 +191,16 @@ Expected Step 1–7 checker result:
 PASS: Gutenberg canonical Steps 1-7 are internally consistent and balance-ready.
 ```
 
-Expected Step 8 result:
+Expected Step 8 checker result:
 
 ```text
-360 selected original passages
+PASS: Step 8 selected original-passage layer is complete and internally consistent.
+```
+
+Expected Step 9 checker result:
+
+```text
+PASS: Step 9 controlled rewriting protocol is complete.
 ```
 
 Expected Step 9 request-preparation result:
@@ -246,7 +255,7 @@ The full selected-passage CSV, Markdown exports, metadata manifest, and packaged
 
 ### Step 9 — Controlled rewriting prompt protocol
 
-Defined the three rewrite conditions, blinded prompt templates, JSON output schema, generation settings, request-preparation script, and rewrite QC validation script.
+Defined the three rewrite conditions, blinded prompt templates, JSON output schema, generation settings, request-preparation script, rewrite QC validation script, and Step 9 protocol checker.
 
 ## Next step
 
