@@ -1,0 +1,12 @@
+metric,value
+selected_original_passages,360
+conditions,3
+rewrite_requests,1080
+paraphrase_requests,360
+modernize_requests,360
+simplify_requests,360
+rewrite_requests_jsonl_bytes,5747172
+rewrite_requests_jsonl_sha256,c3a2fe61ba5d736009b796806b8505d8dcb464952391e24d9fc19a7119ca8d10
+rewrite_request_manifest_bytes,328280
+rewrite_request_manifest_sha256,159d360d266919f93ee248cb2c20fa07d2d09b683bb180287626b73230f6dec6
+created_utc,2026-05-26T00:00:00+00:00
