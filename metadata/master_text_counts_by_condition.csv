@@ -1,0 +1,5 @@
+condition,row_count,unique_passages,total_word_count,min_word_count,max_word_count,mean_word_count,qc_pass,qc_warning,qc_fail,empty_text_count
+original,360,360,203505,550,645,565.291667,360,0,0,0
+paraphrase,360,360,186019,408,613,516.719444,301,59,0,0
+modernize,360,360,191505,425,603,531.958333,341,19,0,0
+simplify,360,360,188559,395,601,523.775000,327,33,0,0

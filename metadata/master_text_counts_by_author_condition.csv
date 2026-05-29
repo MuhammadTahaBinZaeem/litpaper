@@ -1,0 +1,25 @@
+author_id,author_name,condition,row_count,unique_works,unique_passages,total_word_count,min_word_count,max_word_count,mean_word_count,qc_pass,qc_warning,qc_fail
+austen,Jane Austen,original,60,2,60,33932,550,621,565.533333,60,0,0
+austen,Jane Austen,paraphrase,60,2,60,31399,415,579,523.316667,55,5,0
+austen,Jane Austen,modernize,60,2,60,32430,487,600,540.500000,60,0,0
+austen,Jane Austen,simplify,60,2,60,31988,482,601,533.133333,60,0,0
+dickens,Charles Dickens,original,60,2,60,33877,550,610,564.616667,60,0,0
+dickens,Charles Dickens,paraphrase,60,2,60,31259,427,594,520.983333,51,9,0
+dickens,Charles Dickens,modernize,60,2,60,32007,466,575,533.450000,58,2,0
+dickens,Charles Dickens,simplify,60,2,60,31460,447,588,524.333333,56,4,0
+poe,Edgar Allan Poe,original,60,2,60,33977,550,645,566.283333,60,0,0
+poe,Edgar Allan Poe,paraphrase,60,2,60,29677,408,571,494.616667,39,21,0
+poe,Edgar Allan Poe,modernize,60,2,60,30849,425,603,514.150000,48,12,0
+poe,Edgar Allan Poe,simplify,60,2,60,29540,395,560,492.333333,40,20,0
+shelley,Mary Shelley,original,60,2,60,34039,550,600,567.316667,60,0,0
+shelley,Mary Shelley,paraphrase,60,2,60,32000,431,613,533.333333,56,4,0
+shelley,Mary Shelley,modernize,60,2,60,32428,466,593,540.466667,58,2,0
+shelley,Mary Shelley,simplify,60,2,60,31852,462,594,530.866667,58,2,0
+twain,Mark Twain,original,60,2,60,33688,550,593,561.466667,60,0,0
+twain,Mark Twain,paraphrase,60,2,60,30686,423,606,511.433333,47,13,0
+twain,Mark Twain,modernize,60,2,60,31928,458,592,532.133333,57,3,0
+twain,Mark Twain,simplify,60,2,60,31929,440,594,532.150000,57,3,0
+wilde,Oscar Wilde,original,60,2,60,33992,550,638,566.533333,60,0,0
+wilde,Oscar Wilde,paraphrase,60,2,60,30998,424,563,516.633333,53,7,0
+wilde,Oscar Wilde,modernize,60,2,60,31863,486,575,531.050000,60,0,0
+wilde,Oscar Wilde,simplify,60,2,60,31790,461,566,529.833333,56,4,0
