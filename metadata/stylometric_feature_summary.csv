@@ -1,0 +1,14 @@
+metric,value
+feature_rows,1440
+unique_text_ids,1440
+feature_columns,205
+identifier_columns,9
+total_columns,214
+conditions,4
+authors,6
+original_rows,360
+paraphrase_rows,360
+modernize_rows,360
+simplify_rows,360
+char3_vocabulary_size,120
+stylometric_features_sha256,e69fc023530fa9719297a6d9c60a6961a86057812cd2cb9e96893f6eba1f6e44
