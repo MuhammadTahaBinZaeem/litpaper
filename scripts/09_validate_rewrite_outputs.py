@@ -34,7 +34,10 @@ SUMMARY = ROOT / "logs" / "rewrite_qc_summary.md"
 
 WORD_RE = re.compile(r"\b[\w’'-]+\b", re.UNICODE)
 SENT_RE = re.compile(r"[^.!?]+[.!?]+(?:[\"”’]+)?|[^.!?]+$", re.UNICODE)
-FORBIDDEN_RE = re.compile(r"Project Gutenberg|dataset|experiment|prompt|author:|title:", re.I)
+FORBIDDEN_RE = re.compile(
+    r"Project\s+Gutenberg|\bdataset\b|\bauthor\s*:|\btitle\s*:|\bas\s+an\s+ai\b|\blanguage\s+model\b",
+    re.I,
+)
 MARKDOWN_RE = re.compile(r"^\s*(#|[-*]\s+|\d+\.\s+)", re.M)
 
 
