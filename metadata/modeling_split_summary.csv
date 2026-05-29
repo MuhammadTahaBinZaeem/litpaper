@@ -1,0 +1,4 @@
+split,text_rows,unique_passages,authors,original_rows,paraphrase_rows,modernize_rows,simplify_rows
+train,1008,252,6,252,252,252,252
+validation,216,54,6,54,54,54,54
+test,216,54,6,54,54,54,54
