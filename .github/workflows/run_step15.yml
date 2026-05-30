@@ -10,6 +10,10 @@ on:
 permissions:
   contents: write
 
+concurrency:
+  group: run-step15-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   run-step15:
     runs-on: ubuntu-latest
@@ -50,5 +54,6 @@ jobs:
             echo "No Step 15 output changes to commit."
           else
             git commit -m "Step 15: add original-to-rewritten degradation results"
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi
