@@ -1,21 +1,17 @@
-name: Run Step 16 Rewritten-Condition Classification
+name: Run Step 16 and Step 17 Analyses
 
 on:
-  push:
-    branches: [ main ]
-    paths:
-      - '.github/workflows/run_step16.yml'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: run-step16-${{ github.ref }}
+  group: run-step16-17-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  run-step16:
+  run-step16-17:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -33,28 +29,28 @@ jobs:
           python scripts/check_step_13_modeling_matrices.py
           python scripts/check_step_14_original_baseline.py
           python scripts/check_step_15_rewrite_degradation.py
-
-      - name: Run Step 16 rewritten-condition classification
-        run: |
-          python scripts/17_run_rewritten_condition_classification.py
           python scripts/check_step_16_rewritten_condition_classification.py
 
-      - name: Commit Step 16 outputs
+      - name: Run Step 17 distance analysis
+        run: |
+          python scripts/18_run_burrows_delta_distance.py
+          python scripts/check_step_17_burrows_delta_distance.py
+
+      - name: Commit Step 17 outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            data/results/rewritten_condition_author_predictions.csv \
-            metadata/rewritten_condition_author_metrics.csv \
-            metadata/rewritten_condition_author_survival_summary.csv \
-            metadata/rewritten_condition_author_confusion_matrices.csv \
-            metadata/rewritten_condition_author_classification_report.csv \
-            metadata/rewritten_condition_author_manifest.csv \
-            logs/step_16_rewritten_condition_classification_report.md
+            data/results/burrows_delta_text_to_author.csv \
+            metadata/inter_author_distance_matrices.csv \
+            metadata/inter_author_distance_summary.csv \
+            metadata/author_centroid_shift_summary.csv \
+            metadata/burrows_delta_distance_manifest.csv \
+            logs/step_17_burrows_delta_distance_report.md
           if git diff --cached --quiet; then
-            echo "No Step 16 output changes to commit."
+            echo "No Step 17 output changes to commit."
           else
-            git commit -m "Step 16: add rewritten-condition author classification results"
+            git commit -m "Step 17: add Burrows Delta distance analysis results"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
