@@ -1,4 +1,4 @@
-name: Run Step 16 and Step 17 Analyses
+name: Run Step 16 to Step 18 Analyses
 
 on:
   workflow_dispatch:
@@ -7,11 +7,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: run-step16-17-${{ github.ref }}
+  group: run-step16-18-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  run-step16-17:
+  run-step16-18:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -30,27 +30,29 @@ jobs:
           python scripts/check_step_14_original_baseline.py
           python scripts/check_step_15_rewrite_degradation.py
           python scripts/check_step_16_rewritten_condition_classification.py
-
-      - name: Run Step 17 distance analysis
-        run: |
-          python scripts/18_run_burrows_delta_distance.py
           python scripts/check_step_17_burrows_delta_distance.py
 
-      - name: Commit Step 17 outputs
+      - name: Run Step 18 feature-family vulnerability analysis
+        run: |
+          python scripts/19_run_feature_family_vulnerability.py
+          python scripts/check_step_18_feature_family_vulnerability.py
+
+      - name: Commit Step 18 outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            data/results/burrows_delta_text_to_author.csv \
-            metadata/inter_author_distance_matrices.csv \
-            metadata/inter_author_distance_summary.csv \
-            metadata/author_centroid_shift_summary.csv \
-            metadata/burrows_delta_distance_manifest.csv \
-            logs/step_17_burrows_delta_distance_report.md
+            data/results/feature_family_degradation_predictions.csv \
+            metadata/feature_family_degradation_metrics.csv \
+            metadata/feature_family_vulnerability_summary.csv \
+            metadata/feature_family_distance_contraction.csv \
+            metadata/feature_family_centroid_shift.csv \
+            metadata/feature_family_vulnerability_manifest.csv \
+            logs/step_18_feature_family_vulnerability_report.md
           if git diff --cached --quiet; then
-            echo "No Step 17 output changes to commit."
+            echo "No Step 18 output changes to commit."
           else
-            git commit -m "Step 17: add Burrows Delta distance analysis results"
+            git commit -m "Step 18: add feature-family vulnerability results"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
