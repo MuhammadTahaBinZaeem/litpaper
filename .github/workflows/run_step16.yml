@@ -1,4 +1,4 @@
-name: Run Step 16 to Step 19 Analyses
+name: Run Step 16 to Step 20 Analyses
 
 on:
   workflow_dispatch:
@@ -7,11 +7,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: run-step16-19-${{ github.ref }}
+  group: run-step16-20-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  run-step16-19:
+  run-step16-20:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -32,32 +32,27 @@ jobs:
           python scripts/check_step_16_rewritten_condition_classification.py
           python scripts/check_step_17_burrows_delta_distance.py
           python scripts/check_step_18_feature_family_vulnerability.py
-
-      - name: Run Step 19 statistical tables and figures
-        run: |
-          python scripts/20_generate_statistical_tables_figures.py
           python scripts/check_step_19_tables_figures.py
 
-      - name: Commit Step 19 outputs
+      - name: Run Step 20 final reproducibility audit
+        run: |
+          python scripts/21_final_reproducibility_audit.py
+          python scripts/check_step_20_final_audit.py
+
+      - name: Commit Step 20 outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            metadata/paper_table_original_baseline.csv \
-            metadata/paper_table_transfer_degradation.csv \
-            metadata/paper_table_same_condition_survival.csv \
-            metadata/paper_table_distance_contraction.csv \
-            metadata/paper_table_feature_family_vulnerability.csv \
-            metadata/statistical_tests_bootstrap_macro_f1_loss.csv \
-            metadata/step19_tables_figures_manifest.csv \
-            figures/fig_step19_macro_f1_degradation.svg \
-            figures/fig_step19_distance_contraction.svg \
-            figures/fig_step19_feature_family_losses.svg \
-            logs/step_19_tables_figures_report.md
+            metadata/final_reproducibility_manifest.csv \
+            metadata/final_step_status.csv \
+            metadata/paper_claim_support_matrix.csv \
+            logs/final_reproducibility_audit_report.md \
+            logs/final_paper_readiness_summary.md
           if git diff --cached --quiet; then
-            echo "No Step 19 output changes to commit."
+            echo "No Step 20 output changes to commit."
           else
-            git commit -m "Step 19: add statistical tables and figures"
+            git commit -m "Step 20: add final reproducibility audit package"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
