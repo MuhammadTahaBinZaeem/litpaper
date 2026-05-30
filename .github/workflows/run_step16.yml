@@ -1,4 +1,4 @@
-name: Run Step 16 to Step 18 Analyses
+name: Run Step 16 to Step 19 Analyses
 
 on:
   workflow_dispatch:
@@ -7,11 +7,11 @@ permissions:
   contents: write
 
 concurrency:
-  group: run-step16-18-${{ github.ref }}
+  group: run-step16-19-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  run-step16-18:
+  run-step16-19:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -31,28 +31,33 @@ jobs:
           python scripts/check_step_15_rewrite_degradation.py
           python scripts/check_step_16_rewritten_condition_classification.py
           python scripts/check_step_17_burrows_delta_distance.py
-
-      - name: Run Step 18 feature-family vulnerability analysis
-        run: |
-          python scripts/19_run_feature_family_vulnerability.py
           python scripts/check_step_18_feature_family_vulnerability.py
 
-      - name: Commit Step 18 outputs
+      - name: Run Step 19 statistical tables and figures
+        run: |
+          python scripts/20_generate_statistical_tables_figures.py
+          python scripts/check_step_19_tables_figures.py
+
+      - name: Commit Step 19 outputs
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add \
-            data/results/feature_family_degradation_predictions.csv \
-            metadata/feature_family_degradation_metrics.csv \
-            metadata/feature_family_vulnerability_summary.csv \
-            metadata/feature_family_distance_contraction.csv \
-            metadata/feature_family_centroid_shift.csv \
-            metadata/feature_family_vulnerability_manifest.csv \
-            logs/step_18_feature_family_vulnerability_report.md
+            metadata/paper_table_original_baseline.csv \
+            metadata/paper_table_transfer_degradation.csv \
+            metadata/paper_table_same_condition_survival.csv \
+            metadata/paper_table_distance_contraction.csv \
+            metadata/paper_table_feature_family_vulnerability.csv \
+            metadata/statistical_tests_bootstrap_macro_f1_loss.csv \
+            metadata/step19_tables_figures_manifest.csv \
+            figures/fig_step19_macro_f1_degradation.svg \
+            figures/fig_step19_distance_contraction.svg \
+            figures/fig_step19_feature_family_losses.svg \
+            logs/step_19_tables_figures_report.md
           if git diff --cached --quiet; then
-            echo "No Step 18 output changes to commit."
+            echo "No Step 19 output changes to commit."
           else
-            git commit -m "Step 18: add feature-family vulnerability results"
+            git commit -m "Step 19: add statistical tables and figures"
             git pull --rebase origin main
             git push origin HEAD:main
           fi
