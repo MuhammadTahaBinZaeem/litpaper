@@ -1,0 +1,7 @@
+feature_set,condition,original_mean_distance,condition_mean_distance,distance_contraction,distance_ratio,pair_count
+function_word,paraphrase,0.450105353,0.357475739,0.092629614,0.794204594,15
+function_word,modernize,0.450105353,0.393822044,0.056283309,0.874955255,15
+function_word,simplify,0.450105353,0.376919277,0.073186076,0.837402343,15
+all_features,paraphrase,0.466478556,0.382225559,0.084252997,0.819385059,15
+all_features,modernize,0.466478556,0.417092414,0.049386142,0.894129877,15
+all_features,simplify,0.466478556,0.40530839,0.061170166,0.868868214,15

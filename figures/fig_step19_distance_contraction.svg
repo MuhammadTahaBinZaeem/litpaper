@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="520" viewBox="0 0 900 520">
+<rect width="100%" height="100%" fill="white"/>
+<text x="450.0" y="35" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Function-word Inter-author Distance Contraction</text>
+<line x1="90" y1="420" x2="860" y2="420" stroke="black"/>
+<line x1="90" y1="70" x2="90" y2="420" stroke="black"/>
+<line x1="85" y1="420.0" x2="90" y2="420.0" stroke="black"/>
+<text x="80" y="424.0" text-anchor="end" font-family="Arial" font-size="12">0.00</text>
+<line x1="85" y1="350.0" x2="90" y2="350.0" stroke="black"/>
+<text x="80" y="354.0" text-anchor="end" font-family="Arial" font-size="12">0.02</text>
+<line x1="85" y1="280.0" x2="90" y2="280.0" stroke="black"/>
+<text x="80" y="284.0" text-anchor="end" font-family="Arial" font-size="12">0.04</text>
+<line x1="85" y1="210.0" x2="90" y2="210.0" stroke="black"/>
+<text x="80" y="214.0" text-anchor="end" font-family="Arial" font-size="12">0.06</text>
+<line x1="85" y1="140.0" x2="90" y2="140.0" stroke="black"/>
+<text x="80" y="144.0" text-anchor="end" font-family="Arial" font-size="12">0.07</text>
+<line x1="85" y1="70.0" x2="90" y2="70.0" stroke="black"/>
+<text x="80" y="74.0" text-anchor="end" font-family="Arial" font-size="12">0.09</text>
+<rect x="90.0" y="69.99999999999994" width="244.66666666666666" height="350.00000000000006" fill="#7aa6c2" stroke="black"/>
+<text x="212.33333333333331" y="442" text-anchor="middle" font-family="Arial" font-size="12">paraphrase</text>
+<text x="212.33333333333331" y="63.99999999999994" text-anchor="middle" font-family="Arial" font-size="12">0.093</text>
+<rect x="352.66666666666663" y="207.33412243302666" width="244.66666666666666" height="212.66587756697334" fill="#7aa6c2" stroke="black"/>
+<text x="474.99999999999994" y="442" text-anchor="middle" font-family="Arial" font-size="12">modernize</text>
+<text x="474.99999999999994" y="201.33412243302666" text-anchor="middle" font-family="Arial" font-size="12">0.056</text>
+<rect x="615.3333333333333" y="143.46719916159856" width="244.66666666666666" height="276.53280083840144" fill="#7aa6c2" stroke="black"/>
+<text x="737.6666666666666" y="442" text-anchor="middle" font-family="Arial" font-size="12">simplify</text>
+<text x="737.6666666666666" y="137.46719916159856" text-anchor="middle" font-family="Arial" font-size="12">0.073</text>
+<text x="25" y="245.0" text-anchor="middle" font-family="Arial" font-size="14" transform="rotate(-90 25 245.0)">Contraction</text>
+</svg>
